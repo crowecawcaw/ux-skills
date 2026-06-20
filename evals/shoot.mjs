@@ -30,6 +30,11 @@
 //     own close/primary button, not a backdrop click.
 //   - on mobile the search box is hidden behind an icon — click the search
 //     toggle before filling `input[placeholder*='Search']`.
+//   - `.a-iconbtn` matches several controls (back button, mobile search toggle)
+//     — scope it (e.g. `.a-content > .a-iconbtn`) or use an aria-label.
+//   - first-run modals (welcome / how-it-works) are gated by localStorage and
+//     won't reappear on a later goto in the same run; capture them on the
+//     first navigation.
 //
 // Steps fail fast (8s) on a bad selector rather than stalling, and log the error.
 
