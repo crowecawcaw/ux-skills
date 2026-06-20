@@ -25,9 +25,23 @@ helper; it writes `raw.md`), then a *fresh* subagent for Stage 2 (it reads
 `raw.md` + the brief, writes `findings.md`), then another for Stage 3 (it reads
 `findings.md`, writes `report.md`). Each starts focused on just its input file,
 so the screenshot-exploration noise from Stage 1 doesn't crowd the diagnosis, and
-diagnosis doesn't crowd the report. You orchestrate: launch each stage, confirm
-its file was written and carries the task-completion check, and pass the path
-along. (For a quick review of a small app you may run the stages inline instead.)
+diagnosis doesn't crowd the report.
+
+**Within Stage 1, fan out by *kind of check* — keep the high-level goal review
+separate from the low-level mechanical checks.** Capture the screenshots once
+(run the happy-path scripts + your probes into a shared folder), then spawn:
+- a **goal-review** subagent — walks each task to completion and verifies the
+  app's promises (Stage 1 step 2). This is the headline judgment; it must not
+  share context with color-counting.
+- an **encoding-inventory** subagent — catalogs every color/icon/badge and its
+  meaning (step 3).
+- one or more **checklist** subagents — work the per-screen items (step 4); for
+  a large app, split these further per flow.
+
+Give each the shared screenshot folder (and source access) so they don't re-drive
+the app. The Stage 1 orchestrator consolidates their returns into one `raw.md`
+with the goal review at the top, reconciling the encoding inventory across
+agents. (For a quick review of a small app you may run everything inline.)
 
 ## Inputs
 
@@ -77,10 +91,10 @@ actually works.
    observation and a screenshot reference. Answer every applicable item — including
    the ones that pass.
 
-For a large app, you may delegate Stage 1 per flow to subagents, each returning
-its screens' raw section and any encodings it saw; then consolidate into one
-`raw.md` (and reconcile the encoding inventory). Keep the task-completion check
-(step 2) yourself — it's the synthesis a per-flow split tends to lose.
+When you split Stage 1 across subagents (see the fan-out note above), the
+goal-review check (step 2) goes to its own agent and lands at the top of
+`raw.md` — never folded in with the per-screen checklist returns, which is where
+the headline tends to get lost.
 
 ## Stage 2 — Diagnose (write `findings.md`)
 
