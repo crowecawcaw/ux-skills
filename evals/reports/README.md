@@ -13,8 +13,13 @@ low); the ones here still use the older 0–4 scale they were produced with.
 
 | File | Model | System version |
 |---|---|---|
-| `haiku-structured.md` | Haiku | structured checklists + handover scripts; 0–4 severity |
-| `haiku-final.md` | Haiku | same + sharpened severity rule (core-job = top grade) |
+| `832events-latest/` | Haiku | **current** — formal staged process (`raw.md` + `report.md`), task-completion-first, high/medium/low |
+| `haiku-final.md` | Haiku | earlier — structured checklists, 0–4 severity |
+| `haiku-structured.md` | Haiku | earlier — structured checklists, 0–4 severity (pre severity-rule sharpening) |
+
+`832events-latest/raw.md` is the genuine Stage 1 artifact the reviewer wrote to
+disk (task-completion check → encoding inventory → per-screen checklist);
+`report.md` is the final deliverable it returned.
 
 The two Haiku runs are the point of the exercise: a weaker model leaning on the
 guidance reaches the same headline finding as the stronger reviewers. Between the
