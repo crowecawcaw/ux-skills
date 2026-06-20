@@ -8,9 +8,12 @@ and produces actionable feedback.
 
 ## Tenets
 
-- **Insights, not checklists.** The review tool does what a senior UX reviewer
-  would do, in the context of a specific app with a specific goal. It is not a
-  generic checklist of things like contrast ratios.
+- **Checklists for rigor, insights for output.** The reviewer works through a
+  structured checklist on every screen — documenting each answer in a raw pass so
+  coverage doesn't depend on what the model happens to notice — but it judges
+  each item against *this* app's specific goal and persona. The deliverable is a
+  prioritized set of insights a senior UX reviewer would give, not a generic
+  pass/fail scorecard of universal rules.
 
 - **For agents primarily, humans second.** We want to unlock agents to produce
   better UI designs through quality feedback. Feedback should be legible,

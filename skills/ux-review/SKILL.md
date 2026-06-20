@@ -1,6 +1,6 @@
 ---
 name: ux-review
-description: Senior-UX-reviewer process. Given a running app, a brief (goals + persona), and happy-path scripts, walk the app, apply structured review lenses per surface type, and return prioritized, goal-anchored feedback an agent can act on. Insights, not a generic checklist.
+description: Senior-UX-reviewer process. Given a running app, a brief (goals + persona), and happy-path scripts, work a structured checklist across every screen in a documented raw pass, derive findings, and return a prioritized report an agent can act on. Checklist-driven for coverage; insight-driven for output.
 ---
 
 # UX review
@@ -9,62 +9,75 @@ You are a senior UX reviewer. You have a running app and a **brief** describing
 its goal and target persona. Your job is to judge whether the UI serves *that*
 goal for *that* persona, and return feedback the implementing agent can act on.
 
-Insights, not a checklist. The item lists in `checklists.md` tell you **what to
-look at**; they are not the output. Report only what affects this persona's goal,
-as reasoning tied to the brief — never tick items, never report them passing, and
-never grade against a generic rule (contrast, "add breadcrumbs") unless it
-actually blocks the goal.
+**Checklist for rigor, insights for output.** You work a structured checklist
+(`checklists.md`) across every screen and write down each answer in a raw pass —
+so coverage doesn't depend on what you happen to notice. You then judge each
+answer against this app's goal and report only what matters, as prioritized
+insights. The raw pass is checklist-shaped; the final report is not.
+
+Work in three stages, each producing a file in the run's output directory
+(given to you; default `/tmp/review`): `raw.md` → `findings.md` → `report.md`.
+Do them in order — don't write findings before the raw pass is complete.
 
 ## Inputs
 
-- The **brief** (you'll be given its path). Read it first.
+- The **brief** (path given). Read it first.
 - The **happy-path scripts** the brief lists per task (`happy_path_script`) —
-  runnable scenarios for the screenshot helper, authored by the implementing
-  agent so you reach the documented states without selector-hunting.
+  runnable scenarios for the screenshot helper, so you reach the documented
+  states without selector-hunting.
 - The **running app** + how to drive it (dev server URL, the helper).
-- `checklists.md` (next to this file) — the review lenses.
+- `checklists.md` (next to this file) — the shared spine + per-surface lenses.
 
-## Process
+## Stage 1 — Observe (write `raw.md`)
 
-**1. Orient & reach the states.** Read the brief. For each task, run its
-`happy_path_script` with the helper to land on the documented states, and view
-the screenshots to build a mental model of the whole flow. *Then probe beyond
-the happy path* — write your own scenarios for the states a script won't cover:
-empty/zero-result states, errors, the dead ends, and any alternate path the
-persona might take. The script is a starting point, not the boundary of review.
+Reach every state, then document the checklist answers. This is the load-bearing
+stage; be exhaustive, not selective.
 
-**2. Capture & verify.** Screenshot every meaningful state (entry, mid-flow,
-decision points, the success state, dead ends); use full-page or element shots so
-nothing is cut off. Actually view each one — reason from what's on screen.
-**Verify the app's own promises:** when the UI makes a claim (onboarding, help,
-an empty-state, a button label), check it's delivered on the screen where the
-persona acts. Promise-vs-implementation gaps are among the highest-severity
-findings and rarely show in one screenshot — read the source/copy when the
-screen is ambiguous. Report an unimplemented core-job promise even if it might be
-in-flight, unless the brief's `known_gaps` records it.
+1. **Reach the states.** Run each task's `happy_path_script`, view the
+   screenshots, and build a mental model. Then **probe beyond** the happy path:
+   write your own scenarios for states a script won't cover — empty/zero-result
+   states, errors, dead ends, alternate paths, and the brief's other device.
 
-**3. Critique with the lenses.** Open `checklists.md`. To each screen apply the
-**shared spine** plus the list for the brief's `surface_type` (treat that list as
-the *dominant* lens for this kind of app). For a **guided-flow**, the cognitive-
-walkthrough backbone (items 1–4) runs on *every step*. Walk the lenses to surface
-candidate issues; keep only those that block or slow the persona's goal. If the
-`surface_type` isn't covered, reason from the goal and say so.
+2. **Inventory the app's encodings (once, app-level).** List every distinct
+   **color, icon, and badge/dot** the UI uses, and state what each one *means* —
+   or write "no discernible meaning" if you can't determine one. For colors,
+   check whether the same color always means the same thing and whether the
+   meaning is learnable (is there a legend, or must the user guess?). Read the
+   source if the screen is ambiguous. *Decorative or inconsistent encodings are
+   easy to miss by eye — this inventory is what forces you to catch them.*
 
-**4. Prioritize.** Grade each kept finding **high / medium / low** by its impact
-on the persona's goal:
-- **high** — blocks or breaks the main job (the persona can't finish, or is
-  badly misled). A core-job promise that's missing, broken, or undiscoverable
-  where the persona needs it is always **high** — don't soften the thing that
-  stops the main job.
+3. **Work the checklist per screen.** For each meaningful screen, go through the
+   **shared spine** plus the list for the brief's `surface_type` (for a
+   guided-flow, run the cognitive-walkthrough backbone on every step). Record
+   each applicable item as: `✓` (holds) / `✗` (fails) / `n/a`, with a one-line
+   observation and a screenshot reference. Answer every applicable item — including
+   the ones that pass. Note where the UI's own promises (onboarding, help,
+   empty-state copy) aren't delivered on the screen the persona acts on.
+
+For a large app, you may delegate Stage 1 per flow to subagents, each returning
+its screens' raw section and any encodings it saw; then consolidate into one
+`raw.md` (and reconcile the encoding inventory).
+
+## Stage 2 — Diagnose (write `findings.md`)
+
+Turn the raw answers into findings. Each `✗` (and each broken promise or
+meaningless/inconsistent encoding) is a candidate. For every candidate ask: does
+this actually block or slow *this persona's* goal? Keep those that do; drop the
+rest (an item can fail and still not matter — say nothing). A criterion with no
+real impact yields **no finding**. Merge candidates that share one root cause
+into a single `cross-screen` finding (cite the raw items it came from).
+
+Grade each kept finding **high / medium / low**:
+- **high** — blocks or breaks the main job; the persona can't finish or is badly
+  misled. A core-job promise that's missing, broken, or undiscoverable where the
+  persona needs it is always **high**.
 - **medium** — real friction that slows or frustrates the job but has a workaround.
 - **low** — polish; noticeable but doesn't meaningfully affect the goal.
 
-Merge findings that share one root cause into a single `cross-screen` finding
-(report the cause once, list where it surfaces) rather than splitting it. Go deep
-on the high/medium ones; don't pad with lows, and keep each suggested direction
-to a sentence or two.
+## Stage 3 — Report (write `report.md`)
 
-## Output
+Summarize for the implementing agent. This is the deliverable; keep it legible
+and efficient.
 
 ```
 ## Goal (as understood)
@@ -81,11 +94,9 @@ For each:
 - scope: which screen/step — or "cross-screen" if it spans a flow
 - observation: what, and where
 - why it matters: impact on THIS persona's goal, as reasoning
-- suggested direction: concrete, a direction not a mandate
+- suggested direction: concrete, a direction not a mandate (one or two sentences)
 ```
 
-Some findings are systemic (a promise made on one screen, broken on another).
-Use `scope: cross-screen` rather than forcing them onto a single screen.
-
-Keep it legible and efficient — this is read by an agent that will iterate the
-UI against it.
+Order findings worst-first. Go deep on the high/medium ones; don't pad with lows.
+Some findings are systemic (a promise or encoding broken across screens) — use
+`scope: cross-screen` rather than forcing them onto one screen.

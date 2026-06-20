@@ -76,32 +76,24 @@ things the app deliberately doesn't do).
 
 ## The review process (reviewer's method)
 
-Backbone is a **cognitive walkthrough**: decompose each task into its happy-path
-steps and, at every step, interrogate it against the goal. Two passes (build a
-mental model first, then critique), severity-rank the findings, and only ever
-report insights tied to the goal — never a flat checklist.
+Three stages, each producing a file, so coverage is documented rather than left
+to what the model happens to notice. The checklist drives the raw pass; only the
+final report is prioritized insight. (Item lists live in `skills/ux-review/
+checklists.md`; the cognitive walkthrough is the guided-flow backbone.)
 
-1. **Run and orient.** Start the app, walk each primary task once to build a
-   mental model, capturing a screenshot per meaningful state.
-2. **Walk each step, ask the core questions.** At every step:
-   - Will the persona know this is what to do next? *(right sub-goal)*
-   - Is the correct action visible / discoverable?
-   - Will they connect that action to the outcome they want? *(label/affordance)*
-   - After acting, is it clear progress was made? *(feedback / system status)*
-3. **Apply the shared spine** (across all surface types):
-   - Does the visual hierarchy put the goal-relevant thing first, at a glance?
-   - Does every color / icon / pattern carry one consistent, learnable meaning?
-   - Is anything on screen irrelevant to the goal (competing for attention)?
-4. **Apply surface-type lenses** (declared in the brief):
-   - **guided-flow** → is the single next action unambiguous on every screen?
-   - **monitoring** → is everything needed visible at a glance, without drilling?
-   - **browse-search** → can the persona find and evaluate the right item fast?
-5. **Pull heuristics in only where relevant** — Nielsen's 10 as hypothesis
-   generators (status, error prevention, recognition-over-recall, recovery), not
-   a pass/fail sweep.
-6. **Grade and prioritize.** Grade each finding high / medium / low by its impact
-   on the persona's goal (a broken core-job promise is always high), and report
-   worst-first.
+1. **Observe → `raw.md`.** Reach every state (run the brief's happy-path scripts,
+   then probe empty/error/alternate states). Inventory every color, icon, and
+   badge and what each *means* (or "no discernible meaning"). Then work the
+   checklist — the shared spine + the surface-type lens — on every screen,
+   recording each item `✓ / ✗ / n/a` with a one-line observation and screenshot
+   ref. Answer the passing items too. Large apps can fan Stage 1 out to subagents
+   per flow.
+2. **Diagnose → `findings.md`.** Each `✗` (and each broken promise or
+   meaningless/inconsistent encoding) is a candidate; keep only those that block
+   or slow *this persona's* goal — a failed item with no real impact yields no
+   finding. Merge shared-root-cause candidates. Grade high / medium / low (a
+   broken core-job promise is always high).
+3. **Report → `report.md`.** The deliverable, worst-first.
 
 ### Feedback format
 

@@ -1,8 +1,11 @@
 # Review item lists
 
-Lenses for what to look at on each screen — **not** an output checklist. Use them
-to find issues; report only what affects the persona's goal, as insights with
-severity (see `SKILL.md`). Don't tick items or report them passing.
+The checklist worked across every screen. In **Stage 1** (raw pass) answer every
+applicable item — including the ones that pass — with `✓ / ✗ / n/a`, a one-line
+observation, and a screenshot ref. In **Stage 2** the `✗`s become candidate
+findings, kept only where they affect the persona's goal. So: tick everything in
+the raw pass; the *final report* carries only prioritized insights (see
+`SKILL.md`).
 
 Apply the **shared spine** to every screen, plus the list for the brief's
 `surface_type`. Items are adapted from established UX sources (cited per group).
