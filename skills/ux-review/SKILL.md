@@ -51,8 +51,13 @@ candidate issues; keep only those that block or slow the persona's goal. If the
 `surface_type` isn't covered, reason from the goal and say so.
 
 **4. Prioritize.** Score each kept finding 0–4 by frequency × impact ×
-persistence: 0 cosmetic · 1 minor · 2 moderate · 3 major · 4 blocks the goal. Go
-deep on the few that matter; don't pad with nitpicks.
+persistence: 0 cosmetic · 1 minor · 2 moderate · 3 major · 4 blocks the goal. A
+core-job promise that is missing, broken, or undiscoverable where the persona
+needs it is a **4** — don't under-rate the thing that stops the main job. Merge
+findings that share one root cause into a single `cross-screen` finding (report
+the cause once, list where it surfaces) rather than splitting it. Go deep on the
+few that matter; don't pad with nitpicks, and keep each suggested direction to a
+sentence or two.
 
 ## Output
 
