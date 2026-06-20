@@ -9,7 +9,9 @@
 //   "outDir": "/tmp/shots",                          // where PNGs land
 //   "steps": [
 //     { "goto": "/" },
-//     { "shot": "01-home" },                         // -> <outDir>/01-home.png
+//     { "shot": "01-home" },                         // viewport screenshot
+//     { "shot": "01-home-full", "fullPage": true },  // whole scrollable page
+//     { "shotEl": ["help-modal", ".modal"] },        // just one element (modals!)
 //     { "click": "text=Start browsing" },
 //     { "fill": ["input", "brewery"] },              // [selector, value]
 //     { "press": "Enter" },
@@ -17,8 +19,11 @@
 //   ]
 // }
 //
-// Selectors are Playwright selectors (text=, CSS, role=...). The browser is
-// shared across all steps so state (filters, selections) carries through.
+// Set "viewport" to review a specific device, e.g. {"width":390,"height":844}
+// for mobile. Selectors are Playwright selectors (text=, CSS, role=...). Prefer
+// specific selectors (role=, title=, nth=) over bare text= for ambiguous labels
+// like "Follow" that match several elements. The browser is shared across all
+// steps so state (filters, selections) carries through.
 
 import { readFileSync } from 'fs';
 import pkg from './832events/web/node_modules/playwright-core/index.js';
@@ -54,7 +59,12 @@ for (const step of s.steps) {
       await page.waitForTimeout(step.wait);
     } else if (step.shot !== undefined) {
       const path = `${outDir}/${step.shot}.png`;
-      await page.screenshot({ path });
+      await page.screenshot({ path, fullPage: step.fullPage === true });
+      console.log('shot ' + path);
+    } else if (step.shotEl !== undefined) {
+      const [name, selector] = step.shotEl;
+      const path = `${outDir}/${name}.png`;
+      await page.locator(selector).first().screenshot({ path });
       console.log('shot ' + path);
     }
   } catch (err) {

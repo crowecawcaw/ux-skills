@@ -8,8 +8,16 @@ app:
     everything in one place, follow what you like, and subscribe once to a feed
     that updates itself.
   how_to_run: >
-    See evals/832events.md. Dev server: `npm run web:dev` in evals/832events,
-    then http://localhost:5173. Use evals/shoot.mjs to capture screenshots.
+    See evals/832events.md. From repo root the dev server runs via
+    `cd evals/832events && npm run web:dev`, serving http://localhost:5173.
+    Capture screenshots with `node evals/shoot.mjs <scenario.json>` (run from
+    repo root; the helper finds Playwright under evals/832events/web).
+
+primary_device: >
+  Desktop laptop at ~1280px is the primary review target (matches the persona's
+  context). The subscribe handoff is platform-dependent (webcal: on Apple vs.
+  Google vs. copy-link), so also spot-check mobile at 390px — and when a finding
+  only applies to one platform, say so.
 
 persona:
   goals: >
@@ -30,6 +38,11 @@ core_job:
   when: I hear Houston has a lot going on but I keep missing things
   i_want_to: see what's on and get the stuff I care about into my own calendar
   so_i_can: actually show up to events without hunting for them
+  subscribe_target: >
+    The "subscribe once" promise is about the COMBINED feed the persona builds
+    by following calendars / neighborhoods / saved searches — one self-updating
+    link — not subscribing to each calendar separately. Judge the core job
+    against that aggregate feed.
   success_functional: >
     The persona finds events/calendars matching an interest and gets a feed
     added to their calendar app (or clearly understands how to).
@@ -73,9 +86,13 @@ primary_tasks:
 scope:
   in:
     - The web SPA (Discover, Following, You, search, filters, map, subscribe)
+    - Our own instructions for completing the handoff in a calendar app
   out:
     - Data quality / coverage of individual events (a backend concern)
-    - The .ics file format itself; native calendar-app UI after handoff
+    - The .ics file format internals; the calendar app's own UI after handoff
+
+known_gaps:   # so the reviewer doesn't re-report known issues as discoveries
+  - (none recorded yet — add anything intentionally unbuilt or in-flight here)
 
 constraints:
   - Static site; data comes from generated feeds (some calendars may be sparse)

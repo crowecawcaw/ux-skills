@@ -20,12 +20,22 @@ tied to the brief and phrased as reasoning, not taste.
 
 ## Process
 
-**1. Orient.** Read the brief. For each `primary_task`, walk it once in the app
-to build a mental model of the flow before critiquing anything.
+**1. Orient.** Read the brief. Take a broad first pass — walk each `primary_task`
+through the app to build a mental model of the whole flow — *then* go deep and
+critique. (With batch screenshot tooling, this means one wide capture pass
+across all tasks, then targeted ones.)
 
 **2. Capture states.** Screenshot every meaningful state along each task (entry,
 mid-flow, decision points, the success state, and any dead ends). Actually view
-each screenshot — you are reasoning from what's on screen, not assumptions.
+each screenshot — reason from what's on screen, not assumptions. Use full-page
+or element screenshots for tall pages and modals so nothing is cut off.
+
+**Verify the app's own promises.** When the UI makes a claim — onboarding, help
+text, an empty-state, a button label — check that the UI actually delivers it on
+the screen where the persona acts. Promise-vs-implementation gaps (something
+sold in onboarding but missing where it's needed) are among the highest-severity
+findings and rarely visible in a single screenshot. Read the relevant source or
+copy when the screen alone is ambiguous.
 
 **3. Walk each step against the persona.** At every step of a task, ask:
 - Will this persona know what to do next? (right sub-goal)
@@ -34,7 +44,9 @@ each screenshot — you are reasoning from what's on screen, not assumptions.
 - After acting, is it clear progress was made? (feedback / system status)
 A "no" is a finding, localized to that step.
 
-**4. Apply the shared spine** (all apps):
+**4. Apply the shared spine** (all apps) — but only raise an item here if it
+actually blocks or slows *this* persona's goal; don't report it as a headline
+just because it's true:
 - Does the visual hierarchy put the goal-relevant thing first, at a glance?
 - Does every color / icon / pattern carry one consistent, learnable meaning?
 - Is anything on screen irrelevant to the goal, competing for attention?
@@ -54,18 +66,23 @@ few findings that matter for the goal; don't pad with nitpicks.
 ```
 ## Goal (as understood)
 One line: the task, persona, and what success looks like.
+Reviewed on: <viewport / device> — note if findings are device-specific.
 
 ## What's working
 1–3 goal-relevant strengths.
 
 ## Findings (worst first)
 For each:
-- severity: 0–4
+- severity: 0–4 (note if conditional, e.g. "4 on desktop, n/a on iOS")
 - principle: clarity | hierarchy | consistency | feedback | discoverability | ...
-- observation: what, and where (name the screen / step)
+- scope: which screen/step — or "cross-screen" if it spans a flow
+- observation: what, and where
 - why it matters: impact on THIS persona's goal, as reasoning
 - suggested direction: concrete, a direction not a mandate
 ```
+
+Some findings are systemic (a promise made on one screen, broken on another).
+Use `scope: cross-screen` rather than forcing them onto a single screen.
 
 Keep it legible and efficient — this is read by an agent that will iterate the
 UI against it.
