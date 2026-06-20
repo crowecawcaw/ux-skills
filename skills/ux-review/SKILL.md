@@ -50,14 +50,19 @@ walkthrough backbone (items 1–4) runs on *every step*. Walk the lenses to surf
 candidate issues; keep only those that block or slow the persona's goal. If the
 `surface_type` isn't covered, reason from the goal and say so.
 
-**4. Prioritize.** Score each kept finding 0–4 by frequency × impact ×
-persistence: 0 cosmetic · 1 minor · 2 moderate · 3 major · 4 blocks the goal. A
-core-job promise that is missing, broken, or undiscoverable where the persona
-needs it is a **4** — don't under-rate the thing that stops the main job. Merge
-findings that share one root cause into a single `cross-screen` finding (report
-the cause once, list where it surfaces) rather than splitting it. Go deep on the
-few that matter; don't pad with nitpicks, and keep each suggested direction to a
-sentence or two.
+**4. Prioritize.** Grade each kept finding **high / medium / low** by its impact
+on the persona's goal:
+- **high** — blocks or breaks the main job (the persona can't finish, or is
+  badly misled). A core-job promise that's missing, broken, or undiscoverable
+  where the persona needs it is always **high** — don't soften the thing that
+  stops the main job.
+- **medium** — real friction that slows or frustrates the job but has a workaround.
+- **low** — polish; noticeable but doesn't meaningfully affect the goal.
+
+Merge findings that share one root cause into a single `cross-screen` finding
+(report the cause once, list where it surfaces) rather than splitting it. Go deep
+on the high/medium ones; don't pad with lows, and keep each suggested direction
+to a sentence or two.
 
 ## Output
 
@@ -71,7 +76,7 @@ Reviewed on: <viewport / device> — note if findings are device-specific.
 
 ## Findings (worst first)
 For each:
-- severity: 0–4 (note if conditional, e.g. "4 on desktop, n/a on iOS")
+- severity: high | medium | low (note if conditional, e.g. "high on desktop, n/a on iOS")
 - principle: clarity | hierarchy | consistency | feedback | discoverability | ...
 - scope: which screen/step — or "cross-screen" if it spans a flow
 - observation: what, and where

@@ -99,8 +99,9 @@ report insights tied to the goal — never a flat checklist.
 5. **Pull heuristics in only where relevant** — Nielsen's 10 as hypothesis
    generators (status, error prevention, recognition-over-recall, recovery), not
    a pass/fail sweep.
-6. **Score and prioritize.** Rate each finding 0–4 (cosmetic → catastrophe) by
-   frequency × impact × persistence, and report worst-first.
+6. **Grade and prioritize.** Grade each finding high / medium / low by its impact
+   on the persona's goal (a broken core-job promise is always high), and report
+   worst-first.
 
 ### Feedback format
 
@@ -109,7 +110,7 @@ Every review returns, anchored to screenshots:
 - **Goal restatement** — the task, persona, and success criteria as understood.
 - **What's working** — 1–3 goal-relevant strengths (honest baseline).
 - **Prioritized findings** — grouped by severity, each as:
-  - `severity` (0–4)
+  - `severity` (high / medium / low)
   - `principle` (clarity / hierarchy / consistency / feedback / …)
   - `observation` (what, and where — link the screenshot/step)
   - `why_it_matters` (impact on *this* persona's goal, as reasoning)
@@ -123,7 +124,8 @@ undifferentiated list.
 Adapted, not copied — these are the starting points, to be refined with evals:
 
 - Cognitive walkthrough (the step-by-step backbone) — NN/g.
-- Heuristic evaluation method + 0–4 severity ratings — Nielsen / NN/g.
+- Heuristic evaluation method + severity ratings (we use a coarser high/medium/
+  low — LLMs grade loose categories more reliably than a 0–4 scale) — Nielsen / NN/g.
 - PURE — per-step, persona-anchored difficulty scoring — NN/g.
 - Jobs-to-be-done / job stories — for a feature-neutral goal.
 - Design-critique discipline (insight not taste, goal-anchored, prioritized) —
