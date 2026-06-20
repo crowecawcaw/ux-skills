@@ -35,7 +35,9 @@ text, an empty-state, a button label — check that the UI actually delivers it 
 the screen where the persona acts. Promise-vs-implementation gaps (something
 sold in onboarding but missing where it's needed) are among the highest-severity
 findings and rarely visible in a single screenshot. Read the relevant source or
-copy when the screen alone is ambiguous.
+copy when the screen alone is ambiguous. Report an unimplemented core-job
+promise even if it might be in-flight — unless the brief's `known_gaps` already
+records it.
 
 **3. Walk each step against the persona.** At every step of a task, ask:
 - Will this persona know what to do next? (right sub-goal)
@@ -51,7 +53,8 @@ just because it's true:
 - Does every color / icon / pattern carry one consistent, learnable meaning?
 - Is anything on screen irrelevant to the goal, competing for attention?
 
-**5. Apply the lens for this `surface_type`:**
+**5. Apply the lens for this `surface_type`** — treat it as the *dominant* lens
+that reweights the spine above for this kind of app:
 - **guided-flow** → is the single next action unambiguous on every screen?
 - **monitoring** → is everything needed visible at a glance, without drilling in?
 - **browse-search** → can the persona find and evaluate the right item fast?

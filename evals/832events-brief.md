@@ -97,4 +97,7 @@ known_gaps:   # so the reviewer doesn't re-report known issues as discoveries
 constraints:
   - Static site; data comes from generated feeds (some calendars may be sparse)
   - Works on desktop and mobile
+  - No accounts: all personalization (follows, saved searches, location filters)
+    is stored client-side in the browser, not server-side — relevant to whether
+    a self-updating subscription can reflect that state.
 ```

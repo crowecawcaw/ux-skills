@@ -24,6 +24,14 @@
 // specific selectors (role=, title=, nth=) over bare text= for ambiguous labels
 // like "Follow" that match several elements. The browser is shared across all
 // steps so state (filters, selections) carries through.
+//
+// 832events-specific selector notes (the first eval app):
+//   - dialogs are `[role=dialog]` (class `.a-dlg`); dismiss via the dialog's
+//     own close/primary button, not a backdrop click.
+//   - on mobile the search box is hidden behind an icon — click the search
+//     toggle before filling `input[placeholder*='Search']`.
+//
+// Steps fail fast (8s) on a bad selector rather than stalling, and log the error.
 
 import { readFileSync } from 'fs';
 import pkg from './832events/web/node_modules/playwright-core/index.js';
@@ -40,6 +48,7 @@ const outDir = s.outDir || '/tmp/shots';
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: s.viewport || { width: 1280, height: 900 } });
+page.setDefaultTimeout(8000);  // fail fast on bad selectors instead of stalling 30s
 
 for (const step of s.steps) {
   try {
