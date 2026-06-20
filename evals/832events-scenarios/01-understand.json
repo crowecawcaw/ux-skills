@@ -1,0 +1,12 @@
+{
+  "_comment": "Handover happy-path for task 1 (understand & decide to use). Authored by the implementing agent so the reviewer reaches the first-run states without selector-hunting. Run, then probe beyond.",
+  "baseUrl": "http://localhost:5173",
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/" },
+    { "shotEl": ["01-welcome-modal", "[role=dialog]"] },
+    { "click": "text=How it works" },
+    { "wait": 600 },
+    { "shotEl": ["01-how-it-works", "[role=dialog]"] }
+  ]
+}

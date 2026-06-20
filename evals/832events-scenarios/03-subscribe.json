@@ -1,0 +1,24 @@
+{
+  "_comment": "Handover happy-path for task 3 (the core job: get a feed into my calendar app). Follow two calendars, open a calendar's subscribe options, then view the combined Following feed. Run, then probe how a user would actually complete a subscription.",
+  "baseUrl": "http://localhost:5173",
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/" },
+    { "click": "text=Start browsing" },
+    { "wait": 600 },
+    { "fill": ["input[placeholder*='Search']", "brewery"] },
+    { "wait": 1000 },
+    { "click": ".ch:has-text('Bad Astronaut Brewery') >> text=Follow" },
+    { "wait": 400 },
+    { "click": ".ch:has-text('Eureka Heights') >> text=Follow" },
+    { "wait": 400 },
+    { "click": ".ch:has-text('Bad Astronaut Brewery')" },
+    { "wait": 800 },
+    { "shot": "03-channel-subscribe", "fullPage": true },
+    { "click": "button[aria-label='Clear search']" },
+    { "wait": 400 },
+    { "click": ".a-railitem:has-text('Following')" },
+    { "wait": 1000 },
+    { "shot": "03-following-feed", "fullPage": true }
+  ]
+}

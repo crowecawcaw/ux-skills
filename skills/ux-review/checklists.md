@@ -1,0 +1,112 @@
+# Review item lists
+
+Lenses for what to look at on each screen — **not** an output checklist. Use them
+to find issues; report only what affects the persona's goal, as insights with
+severity (see `SKILL.md`). Don't tick items or report them passing.
+
+Apply the **shared spine** to every screen, plus the list for the brief's
+`surface_type`. Items are adapted from established UX sources (cited per group).
+
+---
+
+## Shared spine — every screen
+
+**Visual hierarchy & grouping** *(NN/g visual design, Gestalt)*
+- Does the eye land on the goal-relevant action/info first, matching its importance?
+- Are related elements grouped (proximity, shared style, a container) and unrelated ones separated?
+
+**Consistent meaning of color & icons** *(semantic color; WCAG "not color alone")*
+- Does every color encode one consistent, learnable meaning (e.g. red = error/destructive, never decorative)?
+- Is anything signalled by color also carried by text/icon/shape (survives grayscale & colorblindness)?
+- Do icons carry stable meanings, labelled where ambiguous?
+
+**Feedback & system status** *(Nielsen #1, #9)*
+- After every meaningful action, is there timely feedback on what happened and the new state?
+- On error, is the message plain-language, attached to the right place, with a clear recovery path?
+
+**Error prevention & recall** *(Nielsen #5, #6)*
+- Are likely errors prevented up front (constraints, sensible defaults, confirm destructive/irreversible actions)?
+- Are the options/info the user needs visible in context, not something they must remember from a prior screen?
+
+**Consistency & language** *(Nielsen #2, #4; legibility)*
+- Do the same words, controls, and patterns mean the same thing everywhere, following conventions?
+- Are labels/messages in the user's language (no system jargon) and do they say what will actually happen?
+- Is text legible — size, contrast, reading order?
+
+---
+
+## guided-flow — onboarding, forms, checkout, wizards, setup
+
+*Apply per step. Items 1–4 are the backbone (cognitive walkthrough); run them on every step first.*
+
+**Next-action clarity** *(cognitive walkthrough)*
+1. Will the user form the right goal for this step (clear what it's for and why)?
+2. Is the single correct next action visible and noticeable, not hunted for?
+3. Will they connect that control to the outcome they want (labels name the outcome, e.g. "Continue to payment")?
+4. After acting, is it clear they made progress toward the goal?
+
+**Input & effort** *(GOV.UK one-thing-per-page; NN/g cognitive load; Baymard)*
+5. Is the step scoped to one thing, not overloaded with unrelated asks?
+6. Is every field actually necessary here, or can it be deferred/dropped?
+7. Right input control & keyboard for the data type; required vs. optional unambiguous; labels persistent (not vanishing placeholders)?
+
+**Errors** *(Baymard inline validation)*
+8. Is input validated at the right moment (on blur, with positive confirmation), and are messages specific, adjacent, and fix-oriented?
+
+**Progress & control** *(NN/g wizards; flexibility heuristic)*
+9. Does the user know where they are and how much remains?
+10. Can they go back and change earlier answers without losing data?
+11. Is there a review/confirm before an irreversible commit?
+
+**Trust** *(Baymard checkout)*
+12. At sensitive input or commitment, is it clear why the data is needed, what happens next, and that it's safe (cost transparency, no surprise steps)?
+
+---
+
+## browse-search — search, listing, faceted filtering, content discovery
+
+**Finding (search & filter)** *(Baymard search & filters; NN/g faceted search)*
+1. Is search available, sensibly scoped, and tolerant of typos/synonyms/partial terms?
+2. Are filters/facets relevant, predictable, jargon-free, prioritized — applied filters visible & individually removable, with a live result count?
+
+**Scanning & information scent** *(NN/g information scent, list entries, cards)*
+3. Does each result give a strong "scent" of where it leads (label, snippet, context) before clicking?
+4. Can the user tell results apart at a glance without opening each one?
+5. Is the key decision info (title, price, status, date) in a consistent position so the eye scans one column?
+6. Is list-vs-grid / image-vs-text suited to the content and to comparison?
+
+**Evaluating & comparing** *(NN/g product photos, comparison; Baymard sort)*
+7. Are at-a-glance quality cues present without forcing a drill-down, and can results be sorted by what matters with a clear default?
+
+**Result quality & empty states** *(Baymard no-results; search scope)*
+8. Is a zero-results state a recovery point (related queries, broader category, relaxed filters), not a dead end?
+9. Is result scope/progress clear (total count, range, load-more without losing place)?
+
+**Navigation & orientation** *(NN/g large information spaces; GOV.UK navigation)*
+10. Can the user always tell where they are and get back or broaden (location, breadcrumbs, path to a wider set)?
+
+---
+
+## monitoring — dashboards, admin consoles, status pages, analytics
+
+**At-a-glance comprehension** *(Stephen Few; NN/g dashboards)*
+1. Can the user grasp overall status and the few most important numbers within seconds, without scrolling or interaction?
+2. Does the primary view fit one screen, so attention isn't fragmented across paging?
+3. Do charts use fast encodings (length, position — bars/lines) over angle/area (pie/gauge) and no 3D?
+
+**Hierarchy & density** *(Stephen Few; NN/g complex apps)*
+4. Are the most decision-critical metrics the most salient, with secondary data visibly subordinate?
+5. Has non-data ink (decoration, heavy gridlines, redundancy) been stripped?
+6. Are numbers shown with context (vs. target/prior/threshold) and sensible precision?
+
+**Status & alerting** *(Stephen Few; semantic color + accessibility)*
+7. Are abnormal/alert states visually distinct and immediately findable, not buried among normal values?
+8. Is alert meaning carried by more than color alone (icon, label, shape, position)?
+
+**Drill-down & actionability** *(NN/g data tables, complex apps)*
+9. From a flagged metric, is there a clear path to the detail or the action it implies?
+10. For tables, does the layout support find/compare/act, with header rows/columns frozen when it overflows?
+
+**Legibility** *(NN/g charts; Stephen Few)*
+11. Are axes, units, time range, and "data as of" freshness labelled so a number can't be misread?
+12. Is the chart type matched to the question (trend → line, comparison → bar, part-to-whole sparingly)?

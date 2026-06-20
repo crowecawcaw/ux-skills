@@ -1,0 +1,19 @@
+{
+  "_comment": "Handover happy-path for task 2 (find events matching an interest): browse, filter by a tag, search. Run, then probe (other queries, empty results, sort/filter combos).",
+  "baseUrl": "http://localhost:5173",
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/" },
+    { "click": "text=Start browsing" },
+    { "wait": 600 },
+    { "shot": "02-discover" },
+    { "click": "button.a-catchip:visible:has-text('Beer')" },
+    { "wait": 800 },
+    { "shot": "02-filter-beer" },
+    { "click": "button.a-catchip:visible:has-text('All')" },
+    { "wait": 600 },
+    { "fill": ["input[placeholder*='Search']", "brewery"] },
+    { "wait": 1000 },
+    { "shot": "02-search-brewery" }
+  ]
+}

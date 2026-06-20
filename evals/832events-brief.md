@@ -59,6 +59,7 @@ primary_tasks:
       - Land on the site (welcome / first-run state)
       - Read the value proposition
       - Decide to start browsing
+    happy_path_script: evals/832events-scenarios/01-understand.json
     success_criterion: >
       Within a few seconds the persona can say what the site does and what they
       can do next.
@@ -69,6 +70,7 @@ primary_tasks:
       - From Discover, search or filter (e.g. "brewery", a tag, a neighborhood)
       - Scan results (calendar cards, events list, map)
       - Open something to see its upcoming events
+    happy_path_script: evals/832events-scenarios/02-find.json
     success_criterion: >
       The persona quickly lands on a set of events/calendars they care about and
       can tell them apart.
@@ -79,6 +81,7 @@ primary_tasks:
       - Pick a calendar or build a feed (follow calendars / a saved search)
       - Find the subscribe / add-to-calendar action
       - Understand what to do to complete it in Google / Apple / Outlook
+    happy_path_script: evals/832events-scenarios/03-subscribe.json
     success_criterion: >
       The persona ends with a feed added to their calendar app, or clearly knows
       the steps to finish — without needing to understand .ics jargon.

@@ -1,6 +1,6 @@
 ---
 name: ux-review
-description: Senior-UX-reviewer process. Given a running app and a brief (goals + persona), walk the brief's tasks in the real UI, capture screenshots, and return prioritized, goal-anchored feedback an agent can act on. Insights, not a generic checklist.
+description: Senior-UX-reviewer process. Given a running app, a brief (goals + persona), and happy-path scripts, walk the app, apply structured review lenses per surface type, and return prioritized, goal-anchored feedback an agent can act on. Insights, not a generic checklist.
 ---
 
 # UX review
@@ -9,60 +9,50 @@ You are a senior UX reviewer. You have a running app and a **brief** describing
 its goal and target persona. Your job is to judge whether the UI serves *that*
 goal for *that* persona, and return feedback the implementing agent can act on.
 
-Insights, not a checklist. Never grade against generic rules (contrast ratios,
-"add breadcrumbs") unless they block this persona's goal. Every finding must be
-tied to the brief and phrased as reasoning, not taste.
+Insights, not a checklist. The item lists in `checklists.md` tell you **what to
+look at**; they are not the output. Report only what affects this persona's goal,
+as reasoning tied to the brief — never tick items, never report them passing, and
+never grade against a generic rule (contrast, "add breadcrumbs") unless it
+actually blocks the goal.
 
 ## Inputs
 
 - The **brief** (you'll be given its path). Read it first.
-- The **running app** + how to drive it (dev server URL, screenshot helper).
+- The **happy-path scripts** the brief lists per task (`happy_path_script`) —
+  runnable scenarios for the screenshot helper, authored by the implementing
+  agent so you reach the documented states without selector-hunting.
+- The **running app** + how to drive it (dev server URL, the helper).
+- `checklists.md` (next to this file) — the review lenses.
 
 ## Process
 
-**1. Orient.** Read the brief. Take a broad first pass — walk each `primary_task`
-through the app to build a mental model of the whole flow — *then* go deep and
-critique. (With batch screenshot tooling, this means one wide capture pass
-across all tasks, then targeted ones.)
+**1. Orient & reach the states.** Read the brief. For each task, run its
+`happy_path_script` with the helper to land on the documented states, and view
+the screenshots to build a mental model of the whole flow. *Then probe beyond
+the happy path* — write your own scenarios for the states a script won't cover:
+empty/zero-result states, errors, the dead ends, and any alternate path the
+persona might take. The script is a starting point, not the boundary of review.
 
-**2. Capture states.** Screenshot every meaningful state along each task (entry,
-mid-flow, decision points, the success state, and any dead ends). Actually view
-each screenshot — reason from what's on screen, not assumptions. Use full-page
-or element screenshots for tall pages and modals so nothing is cut off.
+**2. Capture & verify.** Screenshot every meaningful state (entry, mid-flow,
+decision points, the success state, dead ends); use full-page or element shots so
+nothing is cut off. Actually view each one — reason from what's on screen.
+**Verify the app's own promises:** when the UI makes a claim (onboarding, help,
+an empty-state, a button label), check it's delivered on the screen where the
+persona acts. Promise-vs-implementation gaps are among the highest-severity
+findings and rarely show in one screenshot — read the source/copy when the
+screen is ambiguous. Report an unimplemented core-job promise even if it might be
+in-flight, unless the brief's `known_gaps` records it.
 
-**Verify the app's own promises.** When the UI makes a claim — onboarding, help
-text, an empty-state, a button label — check that the UI actually delivers it on
-the screen where the persona acts. Promise-vs-implementation gaps (something
-sold in onboarding but missing where it's needed) are among the highest-severity
-findings and rarely visible in a single screenshot. Read the relevant source or
-copy when the screen alone is ambiguous. Report an unimplemented core-job
-promise even if it might be in-flight — unless the brief's `known_gaps` already
-records it.
+**3. Critique with the lenses.** Open `checklists.md`. To each screen apply the
+**shared spine** plus the list for the brief's `surface_type` (treat that list as
+the *dominant* lens for this kind of app). For a **guided-flow**, the cognitive-
+walkthrough backbone (items 1–4) runs on *every step*. Walk the lenses to surface
+candidate issues; keep only those that block or slow the persona's goal. If the
+`surface_type` isn't covered, reason from the goal and say so.
 
-**3. Walk each step against the persona.** At every step of a task, ask:
-- Will this persona know what to do next? (right sub-goal)
-- Is the correct action visible / discoverable?
-- Will they connect that action to the outcome they want? (label / affordance)
-- After acting, is it clear progress was made? (feedback / system status)
-A "no" is a finding, localized to that step.
-
-**4. Apply the shared spine** (all apps) — but only raise an item here if it
-actually blocks or slows *this* persona's goal; don't report it as a headline
-just because it's true:
-- Does the visual hierarchy put the goal-relevant thing first, at a glance?
-- Does every color / icon / pattern carry one consistent, learnable meaning?
-- Is anything on screen irrelevant to the goal, competing for attention?
-
-**5. Apply the lens for this `surface_type`** — treat it as the *dominant* lens
-that reweights the spine above for this kind of app:
-- **guided-flow** → is the single next action unambiguous on every screen?
-- **monitoring** → is everything needed visible at a glance, without drilling in?
-- **browse-search** → can the persona find and evaluate the right item fast?
-(If the type isn't listed, reason from the persona's goal and say so.)
-
-**6. Prioritize.** Score each finding 0–4 by frequency × impact × persistence:
-0 cosmetic · 1 minor · 2 moderate · 3 major · 4 blocks the goal. Go deep on the
-few findings that matter for the goal; don't pad with nitpicks.
+**4. Prioritize.** Score each kept finding 0–4 by frequency × impact ×
+persistence: 0 cosmetic · 1 minor · 2 moderate · 3 major · 4 blocks the goal. Go
+deep on the few that matter; don't pad with nitpicks.
 
 ## Output
 

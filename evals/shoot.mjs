@@ -1,6 +1,8 @@
 // Drive the app and capture screenshots from a scenario file.
 //
-// Usage: node evals/shoot.mjs <scenario.json>
+// Usage: node evals/shoot.mjs <scenario.json> [outDir]
+//        outDir (optional) overrides the scenario's outDir — lets a committed
+//        happy-path scenario be re-run into a fresh screenshot folder.
 //
 // Scenario shape:
 // {
@@ -49,7 +51,7 @@ if (!scenarioPath) {
 }
 const s = JSON.parse(readFileSync(scenarioPath, 'utf8'));
 const baseUrl = s.baseUrl || 'http://localhost:5173';
-const outDir = s.outDir || '/tmp/shots';
+const outDir = process.argv[3] || s.outDir || '/tmp/shots';
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: s.viewport || { width: 1280, height: 900 } });
