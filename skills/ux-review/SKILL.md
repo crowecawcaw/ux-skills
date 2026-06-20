@@ -19,6 +19,16 @@ Work in three stages, each producing a file in the run's output directory
 (given to you; default `/tmp/review`): `raw.md` → `findings.md` → `report.md`.
 Do them in order — don't write findings before the raw pass is complete.
 
+**Run each stage in its own subagent for clean context.** The on-disk files are
+the hand-off: spawn a subagent for Stage 1 (give it the output dir, brief, and
+helper; it writes `raw.md`), then a *fresh* subagent for Stage 2 (it reads
+`raw.md` + the brief, writes `findings.md`), then another for Stage 3 (it reads
+`findings.md`, writes `report.md`). Each starts focused on just its input file,
+so the screenshot-exploration noise from Stage 1 doesn't crowd the diagnosis, and
+diagnosis doesn't crowd the report. You orchestrate: launch each stage, confirm
+its file was written and carries the task-completion check, and pass the path
+along. (For a quick review of a small app you may run the stages inline instead.)
+
 ## Inputs
 
 - The **brief** (path given). Read it first.
