@@ -15,6 +15,12 @@ so coverage doesn't depend on what you happen to notice. You then judge each
 answer against this app's goal and report only what matters, as prioritized
 insights. The raw pass is checklist-shaped; the final report is not.
 
+**Usability, not aesthetics.** Judge whether the persona can understand and
+accomplish their goal — clarity, hierarchy, flow, feedback. Visual taste ("looks
+dated", "use a softer palette") is out of scope; flag a visual issue only when it
+impairs comprehension or the task (e.g. an active state indistinguishable from
+inactive), never for beauty alone.
+
 Work in three stages, each producing a file in the run's output directory
 (given to you; default `/tmp/review`): `raw.md` → `findings.md` → `report.md`.
 Do them in order — don't write findings before the raw pass is complete.

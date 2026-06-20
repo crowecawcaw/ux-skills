@@ -15,6 +15,11 @@ and produces actionable feedback.
   prioritized set of insights a senior UX reviewer would give, not a generic
   pass/fail scorecard of universal rules.
 
+- **Usability, not aesthetics.** The reviewer judges whether the persona can
+  understand and accomplish their goal — clarity, hierarchy, flow, feedback — not
+  whether the UI is beautiful. Visual taste and polish are out of scope; there
+  are better tools for beauty.
+
 - **For agents primarily, humans second.** We want to unlock agents to produce
   better UI designs through quality feedback. Feedback should be legible,
   efficient, and effective for agent iteration. Success is measured with agent
