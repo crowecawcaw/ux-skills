@@ -30,15 +30,29 @@ Do them in order — don't write findings before the raw pass is complete.
 
 ## Stage 1 — Observe (write `raw.md`)
 
-Reach every state, then document the checklist answers. This is the load-bearing
-stage; be exhaustive, not selective.
+Reach every state, then document. Do the parts in order: **task completion
+first** (it protects the headline judgment), then encodings, then the per-screen
+checklist (coverage). Don't let the checklist crowd out whether the main job
+actually works.
 
 1. **Reach the states.** Run each task's `happy_path_script`, view the
    screenshots, and build a mental model. Then **probe beyond** the happy path:
    write your own scenarios for states a script won't cover — empty/zero-result
    states, errors, dead ends, alternate paths, and the brief's other device.
 
-2. **Inventory the app's encodings (once, app-level).** List every distinct
+2. **Walk each task to completion — the most important check.** For each
+   `primary_task`, walk it end-to-end and record: **can the persona actually
+   reach its `success_criterion`?** If not, name exactly where it breaks. Then
+   **verify the app's promises**: every claim the UI makes (onboarding, help,
+   empty-state copy, a button label) must be delivered on the screen where the
+   persona acts — a promise made but not delivered is a break. Do **not** assume
+   a task is served because a similar-looking control exists; confirm it does the
+   job the brief defines (e.g. subscribing to the *aggregate feed* the brief
+   names, not a single item that merely looks similar). A task that can't reach
+   its success_criterion is the headline finding — never let it dissolve into the
+   per-screen items below.
+
+3. **Inventory the app's encodings (once, app-level).** List every distinct
    **color, icon, and badge/dot** the UI uses, and state what each one *means* —
    or write "no discernible meaning" if you can't determine one. For colors,
    check whether the same color always means the same thing and whether the
@@ -46,26 +60,31 @@ stage; be exhaustive, not selective.
    source if the screen is ambiguous. *Decorative or inconsistent encodings are
    easy to miss by eye — this inventory is what forces you to catch them.*
 
-3. **Work the checklist per screen.** For each meaningful screen, go through the
+4. **Work the checklist per screen.** For each meaningful screen, go through the
    **shared spine** plus the list for the brief's `surface_type` (for a
    guided-flow, run the cognitive-walkthrough backbone on every step). Record
    each applicable item as: `✓` (holds) / `✗` (fails) / `n/a`, with a one-line
    observation and a screenshot reference. Answer every applicable item — including
-   the ones that pass. Note where the UI's own promises (onboarding, help,
-   empty-state copy) aren't delivered on the screen the persona acts on.
+   the ones that pass.
 
 For a large app, you may delegate Stage 1 per flow to subagents, each returning
 its screens' raw section and any encodings it saw; then consolidate into one
-`raw.md` (and reconcile the encoding inventory).
+`raw.md` (and reconcile the encoding inventory). Keep the task-completion check
+(step 2) yourself — it's the synthesis a per-flow split tends to lose.
 
 ## Stage 2 — Diagnose (write `findings.md`)
 
-Turn the raw answers into findings. Each `✗` (and each broken promise or
-meaningless/inconsistent encoding) is a candidate. For every candidate ask: does
-this actually block or slow *this persona's* goal? Keep those that do; drop the
-rest (an item can fail and still not matter — say nothing). A criterion with no
-real impact yields **no finding**. Merge candidates that share one root cause
-into a single `cross-screen` finding (cite the raw items it came from).
+Turn the raw answers into findings. **Start with the task-completion check
+(Stage 1 step 2):** any `primary_task` that can't reach its `success_criterion`,
+and any core-job promise that's missing, broken, or undiscoverable where the
+persona needs it, is a finding and almost always the headline — write these
+first, before the per-screen items, and don't let them get downgraded into a
+copy nitpick. Then the per-screen `✗`s and meaningless/inconsistent encodings are
+further candidates. For every candidate ask: does this actually block or slow
+*this persona's* goal? Keep those that do; drop the rest (an item can fail and
+still not matter — say nothing). A criterion with no real impact yields **no
+finding**. Merge candidates that share one root cause into a single
+`cross-screen` finding (cite the raw items it came from).
 
 Grade each kept finding **high / medium / low**:
 - **high** — blocks or breaks the main job; the persona can't finish or is badly
@@ -100,3 +119,8 @@ For each:
 Order findings worst-first. Go deep on the high/medium ones; don't pad with lows.
 Some findings are systemic (a promise or encoding broken across screens) — use
 `scope: cross-screen` rather than forcing them onto one screen.
+
+Don't credit a strength the raw pass contradicts: if a task didn't complete,
+the main job is not "working"; if the encoding inventory found a gap, the colors
+aren't "consistent and learnable". **What's working** is for things the raw pass
+actually confirmed.
