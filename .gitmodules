@@ -1,0 +1,3 @@
+[submodule "evals/832events"]
+	path = evals/832events
+	url = https://github.com/crowecawcaw/832events
