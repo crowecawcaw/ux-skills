@@ -57,6 +57,9 @@ agents. (For a quick review of a small app you may run everything inline.)
   states without selector-hunting.
 - The **running app** + how to drive it (dev server URL, the helper).
 - `checklists.md` (next to this file) — the shared spine + per-surface lenses.
+- `examples.md` (next to this file) — a worked example of each stage's file
+  (`raw.md` / `findings.md` / `report.md`). Match its shape; ignore its content
+  (it's a fictional placeholder app, not a pattern of findings to reproduce).
 
 ## Stage 1 — Observe (write `raw.md`)
 
