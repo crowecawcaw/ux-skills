@@ -1,0 +1,14 @@
+{
+  "_comment": "Mobile viewport probe at 390px - check single column collapse",
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 390, "height": 844 },
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/catalog-loop/index.html" },
+    { "wait": 400 },
+    { "shot": "probe-mobile-landing" },
+    { "fill": ["#search", "tent"] },
+    { "wait": 600 },
+    { "shot": "probe-mobile-search" }
+  ]
+}

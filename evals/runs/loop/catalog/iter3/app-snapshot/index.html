@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GearFinder — Outdoor & Tech Catalog</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">▣</span>
+        <span class="brand-name">GearFinder</span>
+      </a>
+      <form class="searchform" role="search" onsubmit="return false;">
+        <label class="visually-hidden" for="search">Search products</label>
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input
+          id="search"
+          type="search"
+          placeholder="Search products, brands…"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button id="search-clear" type="button" class="search-clear" aria-label="Clear search" hidden>×</button>
+      </form>
+    </div>
+  </header>
+
+  <div class="layout">
+    <button id="mobile-filter-toggle" type="button" class="mobile-filter-btn" aria-expanded="false" aria-controls="filters-panel">
+      <span>&#9776; <span class="mobile-filter-label">Filters</span></span>
+    </button>
+    <aside id="filters-panel" class="filters" aria-label="Filters">
+      <div class="filters-head">
+        <h2>Filters</h2>
+        <button id="reset-all" type="button" class="link-btn">Reset all</button>
+      </div>
+
+      <section class="facet">
+        <h3>Category</h3>
+        <div id="facet-category" class="facet-options"></div>
+      </section>
+
+      <section class="facet">
+        <h3>Brand</h3>
+        <div id="facet-brand" class="facet-options"></div>
+      </section>
+
+      <section class="facet">
+        <h3>Max price</h3>
+        <div class="price-row">
+          <input id="facet-price" type="range" min="0" max="400" step="10" value="400" />
+          <output id="price-out" class="price-out">Any</output>
+        </div>
+      </section>
+
+      <section class="facet">
+        <h3>Minimum rating</h3>
+        <div id="facet-rating" class="facet-options rating-options"></div>
+      </section>
+    </aside>
+    <div id="filters-overlay" class="filters-overlay" hidden></div>
+
+    <main class="results">
+      <div class="results-bar">
+        <div class="results-meta">
+          <strong id="result-count">0</strong>
+          <span id="result-noun">products</span>
+        </div>
+        <label class="sort-control">
+          <span>Sort by</span>
+          <select id="sort">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="rating-desc">Rating: high to low</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="chips" class="chips" aria-label="Active filters"></div>
+
+      <div id="grid" class="grid"></div>
+
+      <div id="empty" class="empty" hidden>
+        <div class="empty-art" aria-hidden="true">🔍</div>
+        <h2>No products match your filters</h2>
+        <p id="empty-detail" class="empty-detail"></p>
+        <div class="empty-actions">
+          <button id="empty-relax" type="button" class="btn btn-primary">Relax filters</button>
+          <button id="empty-clear" type="button" class="btn">Clear all filters</button>
+
+        </div>
+        <div id="empty-suggest" class="empty-suggest"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

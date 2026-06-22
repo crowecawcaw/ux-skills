@@ -1,0 +1,25 @@
+{
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/catalog-loop/index.html" },
+    { "wait": 400 },
+    { "fill": ["#search", "zzznomatch"] },
+    { "wait": 600 },
+    { "shot": "probe-empty-search" },
+    { "fill": ["#search", ""] },
+    { "wait": 400 },
+    { "click": "label.opt:has-text('Camping') input" },
+    { "wait": 400 },
+    { "click": "label.opt:has-text('TrailBlazer') input" },
+    { "wait": 500 },
+    { "shot": "probe-two-filters" },
+    { "click": ".chip" },
+    { "wait": 500 },
+    { "shot": "probe-chip-removed" },
+    { "click": "#clear-all" },
+    { "wait": 500 },
+    { "shot": "probe-cleared" }
+  ]
+}

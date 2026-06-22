@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Northwind Checkout</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="#">Northwind</a>
+      <span class="secure-badge" aria-hidden="true">🔒 Secure checkout</span>
+    </div>
+  </header>
+
+  <main class="wrap checkout" id="checkout-root">
+    <!-- Progress / step indicator -->
+    <nav class="progress" aria-label="Checkout progress">
+      <ol class="steps" id="step-indicator">
+        <li class="step" data-step="cart"><span class="dot">1</span><span class="label">Cart</span></li>
+        <li class="step" data-step="shipping"><span class="dot">2</span><span class="label">Shipping</span></li>
+        <li class="step" data-step="payment"><span class="dot">3</span><span class="label">Payment</span></li>
+        <li class="step" data-step="review"><span class="dot">4</span><span class="label">Review</span></li>
+        <li class="step" data-step="confirmation"><span class="dot">5</span><span class="label">Done</span></li>
+      </ol>
+    </nav>
+
+    <div class="layout">
+      <section class="panel" aria-live="polite">
+        <!-- STEP: CART -->
+        <div class="step-panel" id="panel-cart">
+          <h1>Your cart</h1>
+          <ul class="cart-list" id="cart-list"></ul>
+          <div class="step-actions">
+            <button class="btn btn-primary" id="to-shipping">Continue to shipping</button>
+          </div>
+        </div>
+
+        <!-- STEP: SHIPPING -->
+        <div class="step-panel" id="panel-shipping" hidden>
+          <h1>Shipping address</h1>
+          <form id="form-shipping" novalidate>
+            <p class="fields-note">All fields are required.</p>
+            <div class="field">
+              <label for="ship-name">Full name</label>
+              <input id="ship-name" name="name" type="text" autocomplete="name" required />
+              <p class="error" data-for="ship-name"></p>
+            </div>
+            <div class="field">
+              <label for="ship-email">Email</label>
+              <input id="ship-email" name="email" type="email" autocomplete="email" required />
+              <p class="error" data-for="ship-email"></p>
+            </div>
+            <div class="field">
+              <label for="ship-address">Street address</label>
+              <input id="ship-address" name="address" type="text" autocomplete="street-address" required />
+              <p class="error" data-for="ship-address"></p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="ship-city">City</label>
+                <input id="ship-city" name="city" type="text" autocomplete="address-level2" required />
+                <p class="error" data-for="ship-city"></p>
+              </div>
+              <div class="field">
+                <label for="ship-zip">ZIP code</label>
+                <input id="ship-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" required />
+                <p class="error" data-for="ship-zip"></p>
+              </div>
+            </div>
+            <div class="step-actions">
+              <button type="button" class="btn btn-ghost" data-back="cart">Back to cart</button>
+              <button type="submit" class="btn btn-primary" id="to-payment">Continue to payment</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- STEP: PAYMENT -->
+        <div class="step-panel" id="panel-payment" hidden>
+          <h1>Payment</h1>
+          <form id="form-payment" novalidate>
+            <p class="fields-note">All fields are required.</p>
+            <div class="field">
+              <label for="pay-card">Card number</label>
+              <input id="pay-card" name="card" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" required />
+              <p class="error" data-for="pay-card"></p>
+            </div>
+            <div class="field">
+              <label for="pay-cardname">Name on card</label>
+              <input id="pay-cardname" name="cardname" type="text" autocomplete="cc-name" required />
+              <p class="error" data-for="pay-cardname"></p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="pay-exp">Expiry (MM/YY)</label>
+                <input id="pay-exp" name="exp" type="text" autocomplete="cc-exp" placeholder="MM/YY" required />
+                <p class="error" data-for="pay-exp"></p>
+              </div>
+              <div class="field">
+                <label for="pay-cvc">CVC</label>
+                <input id="pay-cvc" name="cvc" type="text" inputmode="numeric" autocomplete="cc-csc" placeholder="123" required />
+                <p class="error" data-for="pay-cvc"></p>
+              </div>
+            </div>
+            <div class="step-actions">
+              <button type="button" class="btn btn-ghost" data-back="shipping">Back to shipping</button>
+              <button type="submit" class="btn btn-primary" id="to-review">Review order</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- STEP: REVIEW -->
+        <div class="step-panel" id="panel-review" hidden>
+          <h1>Review your order</h1>
+          <p class="review-intro">Please confirm everything below. You can still go back and edit.</p>
+
+          <div class="review-block">
+            <div class="review-head">
+              <h2>Items</h2>
+              <button type="button" class="link-btn" data-back="cart">Edit</button>
+            </div>
+            <ul class="review-items" id="review-items"></ul>
+          </div>
+
+          <div class="review-block">
+            <div class="review-head">
+              <h2>Shipping to</h2>
+              <button type="button" class="link-btn" data-back="shipping">Edit</button>
+            </div>
+            <p class="review-text" id="review-shipping"></p>
+          </div>
+
+          <div class="review-block">
+            <div class="review-head">
+              <h2>Payment</h2>
+              <button type="button" class="link-btn" data-back="payment">Edit</button>
+            </div>
+            <p class="review-text" id="review-payment"></p>
+          </div>
+
+          <div class="step-actions">
+            <button type="button" class="btn btn-ghost" data-back="payment">Back</button>
+            <button type="button" class="btn btn-primary" id="place-order">Place order</button>
+          </div>
+        </div>
+
+        <!-- STEP: CONFIRMATION -->
+        <div class="step-panel" id="panel-confirmation" hidden>
+          <div class="confirm">
+            <div class="confirm-check" aria-hidden="true">✓</div>
+            <h1>Order placed</h1>
+            <p class="confirm-lead">Thanks <span id="confirm-name">there</span> — your order is confirmed.</p>
+            <p class="confirm-order">Order number: <strong id="confirm-number">—</strong></p>
+            <p class="confirm-email">A receipt is on its way to <strong id="confirm-email">your email</strong>.</p>
+            <div class="confirm-summary" id="confirm-summary"></div>
+            <p class="confirm-eta">Estimated delivery: <strong id="confirm-eta">—</strong></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORDER SUMMARY (visible from cart onward) -->
+      <aside class="summary" id="order-summary" aria-label="Order summary">
+        <h2>Order summary</h2>
+        <ul class="summary-items" id="summary-items"></ul>
+        <dl class="summary-costs">
+          <div class="cost-row"><dt>Subtotal</dt><dd id="cost-subtotal">$0.00</dd></div>
+          <div class="cost-row"><dt>Shipping</dt><dd id="cost-shipping">$0.00</dd></div>
+          <div class="cost-row"><dt>Estimated tax</dt><dd id="cost-tax">$0.00</dd></div>
+          <div class="cost-row total"><dt>Total</dt><dd id="cost-total">$0.00</dd></div>
+        </dl>
+        <p class="summary-note">Taxes and shipping shown above. No surprises at the end.</p>
+      </aside>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

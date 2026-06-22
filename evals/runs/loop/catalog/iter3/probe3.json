@@ -1,0 +1,17 @@
+{
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/catalog-loop/index.html" },
+    { "wait": 400 },
+    { "click": "label.opt:has-text('Footwear') input" },
+    { "wait": 300 },
+    { "click": "label.opt:has-text('WoolWorks') input" },
+    { "wait": 600 },
+    { "shot": "probe-no-results-detail" },
+    { "click": "#empty-clear" },
+    { "wait": 500 },
+    { "shot": "probe-empty-clear-result" }
+  ]
+}

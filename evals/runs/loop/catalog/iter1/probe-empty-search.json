@@ -1,0 +1,13 @@
+{
+  "_comment": "Probe: search for a term that returns zero results",
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/catalog-loop/index.html" },
+    { "wait": 400 },
+    { "fill": ["#search", "xyzzy123"] },
+    { "wait": 600 },
+    { "shot": "probe-empty-search" }
+  ]
+}
