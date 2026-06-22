@@ -1,0 +1,3 @@
+# Scratch working copies for the review->address loop eval (final code is
+# snapshotted under evals/runs/loop/<app>/iterN/app-snapshot/)
+evals/apps/*-loop/
