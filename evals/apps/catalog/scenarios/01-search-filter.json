@@ -1,0 +1,17 @@
+{
+  "_comment": "Happy-path for task 1 (find products matching an interest): land, search, then apply a category filter. After running, probe: other queries, partial/case-insensitive matches, removing chips, brand facet.",
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/catalog/index.html" },
+    { "wait": 400 },
+    { "shot": "01-landing" },
+    { "fill": ["#search", "back"] },
+    { "wait": 600 },
+    { "shot": "01-search-back" },
+    { "click": "label.opt:has-text('Backpacks') input" },
+    { "wait": 600 },
+    { "shot": "01-filtered" }
+  ]
+}
