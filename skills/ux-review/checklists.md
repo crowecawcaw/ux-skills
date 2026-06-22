@@ -113,3 +113,8 @@ Apply the **shared spine** to every screen, plus the list for the brief's
 **Legibility** *(NN/g charts; Stephen Few)*
 11. Are axes, units, time range, and "data as of" freshness labelled so a number can't be misread?
 12. Is the chart type matched to the question (trend → line, comparison → bar, part-to-whole sparingly)?
+
+**Chart perception — read the rendered chart, not the data behind it** *(Stephen Few; Cleveland & McGill; truthful-scale)*
+13. **Honest baseline & scale:** does each bar/line value axis start at zero (or clearly mark a deliberate break), so heights and slopes don't visually exaggerate or flatten the real change? A truncated axis that turns a small move into a dramatic swing is misleading.
+14. **Series distinguishable in the pixels:** can you tell every overlaid series apart in the rendered chart (actual vs target, multiple lines/bars) by colour, dash, marker, or direct label — and does that match whatever the legend claims? Two series that look identical can't be read, however correct the data.
+15. **No prominence inversion:** is the single largest / first-read element the most decision-critical metric — not a cost or vanity figure blown up larger (hero slot, biggest type, highlighted card) than the outcome it should serve?

@@ -110,9 +110,15 @@ python3 -m http.server 4010 -d evals/apps   # background it
 
 - **Detection: recall 8/15 (53%), high-severity 5/8 (63%), 0 spurious, ~8 real
   *unseeded* bugs caught.** Reliable on structural/textual defects (missing
-  freshness, missing legend, broken color bars, missing context). **Blind spot:
-  chart-perception** — all 3 missed highs were hero-metric inversion, truncated
-  y-axis, and indistinguishable trend lines (judged from rendered pixels).
+  freshness, missing legend, broken color bars, missing context). **Blind spot
+  (now addressed): chart-perception** — all 3 missed highs were hero-metric
+  inversion, truncated y-axis, and indistinguishable trend lines (judged from
+  rendered pixels). **Fix shipped:** added a *Chart perception* group (items
+  13–15) to the `monitoring` checklist — honest baseline/scale, series
+  distinguishable in the pixels (matching the legend), no prominence inversion.
+  Focused re-check confirms each new item flips its miss from the rendered
+  screenshots (`evals/runs/detection/chart-perception-verification.md`); a full
+  blind re-run to measure the recall number is still pending.
 - **Loop progression (H/M/L):** marketing 0/2/1→0/1/2; checkout 1/2/2→1/1/2;
   catalog 0/2/2→0/1/2. Mediums trend down where fixes are real. **checkout's HIGH
   persists** — a hard multi-step edit-state bug; each fix closed the reported
@@ -144,12 +150,12 @@ python3 -m http.server 4010 -d evals/apps   # background it
 
 ## Suggested next steps
 
-1. **Close the detection blind spot:** add chart-perception items to the
-   monitoring checklist — "is the y-axis baseline honest (not truncated to
-   exaggerate)?", "are chart series visually distinguishable?", "is the most
-   decision-critical metric the most prominent (no hero inversion)?". Then re-run
-   the detection eval to measure the recall lift (expect the 3 missed highs to
-   flip).
+1. **Close the detection blind spot:** ~~add chart-perception items to the
+   monitoring checklist~~ — **done** (items 13–15: honest baseline, series
+   distinguishable, no prominence inversion). Focused per-screen re-check
+   confirms the 3 missed highs now flip. *Remaining:* run a full blind detection
+   eval over all 5 variants to measure the headline recall lift (expect
+   high-severity recall 5/8 → 8/8, overall 8/15 → 11/15).
 2. **Make stage files always land on disk** — some loop reviewers returned
    findings/report as text instead of writing `findings.md`/`report.md`. Tighten
    the SKILL/prompt to require writing each file.
