@@ -16,6 +16,7 @@
 //     { "shotEl": ["help-modal", ".modal"] },        // just one element (modals!)
 //     { "click": "text=Start browsing" },
 //     { "fill": ["input", "brewery"] },              // [selector, value]
+//     { "selectOption": ["select#range", "90"] },    // [selector, value] for <select>
 //     { "press": "Enter" },
 //     { "wait": 1500 }                               // ms
 //   ]
@@ -67,6 +68,9 @@ for (const step of s.steps) {
       await page.waitForTimeout(800);
     } else if (step.fill !== undefined) {
       await page.fill(step.fill[0], step.fill[1], { timeout: 8000 });
+      await page.waitForTimeout(800);
+    } else if (step.selectOption !== undefined) {
+      await page.selectOption(step.selectOption[0], step.selectOption[1], { timeout: 8000 });
       await page.waitForTimeout(800);
     } else if (step.press !== undefined) {
       await page.keyboard.press(step.press);
