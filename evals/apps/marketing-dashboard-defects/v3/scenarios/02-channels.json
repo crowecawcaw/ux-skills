@@ -1,0 +1,11 @@
+{
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/mkt-verify",
+  "steps": [
+    { "goto": "/marketing-dashboard-defects/v3/index.html" },
+    { "wait": 800 },
+    { "shotEl": ["02-channels", ".panel-channel"] },
+    { "shotEl": ["02-legend", ".legend"] }
+  ]
+}

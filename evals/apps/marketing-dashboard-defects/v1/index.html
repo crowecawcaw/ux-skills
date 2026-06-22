@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campaign Performance · Marketing Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">◆</span>
+        <span class="brand-name">Brightline Marketing</span>
+      </div>
+      <h1 class="page-title">Campaign Performance</h1>
+    </div>
+    <div class="topbar-right">
+      <label class="range-label" for="range-select">Date range</label>
+      <select id="range-select" class="range-select" aria-label="Date range">
+        <option value="7">Last 7 days</option>
+        <option value="30" selected>Last 30 days</option>
+        <option value="90">Last 90 days</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="content">
+    <!-- Summary line: plain-language headline -->
+    <section class="headline" id="headline" aria-live="polite">
+      <p class="headline-text" id="headline-text">Loading your results…</p>
+    </section>
+
+    <!-- KPI cards -->
+    <section class="kpi-row" aria-label="Key results">
+      <div class="kpi-card kpi-hero" id="kpi-spend">
+        <div class="kpi-top">
+          <span class="kpi-name">Ad spend</span>
+          <span class="kpi-help" title="What you paid for ads in this period.">?</span>
+        </div>
+        <div class="kpi-value" data-field="value"></div>
+        <div class="kpi-context">
+          <span class="kpi-delta" data-field="delta"></span>
+          <span class="kpi-target" data-field="target"></span>
+        </div>
+        <div class="kpi-bar"><div class="kpi-bar-fill" data-field="bar"></div></div>
+      </div>
+
+      <div class="kpi-card" id="kpi-revenue">
+        <div class="kpi-top">
+          <span class="kpi-name">Revenue</span>
+          <span class="kpi-help" title="Money earned from sales driven by these campaigns.">?</span>
+        </div>
+        <div class="kpi-value" data-field="value"></div>
+      </div>
+
+      <div class="kpi-card" id="kpi-conversions">
+        <div class="kpi-top">
+          <span class="kpi-name">New customers</span>
+          <span class="kpi-help" title="People who bought after clicking an ad.">?</span>
+        </div>
+        <div class="kpi-value" data-field="value"></div>
+        <div class="kpi-context">
+          <span class="kpi-delta" data-field="delta"></span>
+          <span class="kpi-target" data-field="target"></span>
+        </div>
+        <div class="kpi-bar"><div class="kpi-bar-fill" data-field="bar"></div></div>
+      </div>
+
+      <div class="kpi-card" id="kpi-roas">
+        <div class="kpi-top">
+          <span class="kpi-name">Return on ad spend</span>
+          <span class="kpi-help" title="Revenue earned for every $1 spent on ads. Higher is better.">?</span>
+        </div>
+        <div class="kpi-value" data-field="value"></div>
+        <div class="kpi-context">
+          <span class="kpi-delta" data-field="delta"></span>
+          <span class="kpi-target" data-field="target"></span>
+        </div>
+        <div class="kpi-bar"><div class="kpi-bar-fill" data-field="bar"></div></div>
+      </div>
+    </section>
+
+    <!-- Legend explaining color meaning -->
+    <div class="legend" aria-label="What the colors mean">
+      <span class="legend-item"><span class="swatch swatch-good"></span> Ahead of target</span>
+      <span class="legend-item"><span class="swatch swatch-warn"></span> Close to target</span>
+      <span class="legend-item"><span class="swatch swatch-bad"></span> Behind target</span>
+    </div>
+
+    <div class="grid">
+      <!-- Trend chart -->
+      <section class="panel panel-trend">
+        <div class="panel-head">
+          <h2 class="panel-title">Revenue over time</h2>
+          <p class="panel-sub" id="trend-sub">How daily revenue is tracking against your target.</p>
+        </div>
+        <div class="trend-legend">
+          <span class="tl-item"><span class="tl-line tl-actual"></span> Actual revenue</span>
+          <span class="tl-item"><span class="tl-line tl-target"></span> Daily target</span>
+        </div>
+        <div class="chart-wrap" id="trend-chart"></div>
+      </section>
+
+      <!-- Channel breakdown -->
+      <section class="panel panel-channel">
+        <div class="panel-head">
+          <h2 class="panel-title">How each channel is doing</h2>
+          <p class="panel-sub">Revenue by channel, with how it compares to target.</p>
+        </div>
+        <div class="channel-list" id="channel-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

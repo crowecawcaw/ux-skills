@@ -1,0 +1,12 @@
+{
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/mkt-verify",
+  "steps": [
+    { "goto": "/marketing-dashboard-defects/v4/index.html" },
+    { "wait": 800 },
+    { "shot": "01-overview" },
+    { "shot": "01-overview-full", "fullPage": true },
+    { "shotEl": ["01-kpis", ".kpi-row"] }
+  ]
+}

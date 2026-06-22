@@ -1,0 +1,14 @@
+{
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/mkt-verify",
+  "steps": [
+    { "goto": "/marketing-dashboard-defects/v2/index.html" },
+    { "wait": 800 },
+    { "shotEl": ["03-trend-30d", ".panel-trend"] },
+    { "selectOption": ["#range-select", "90"] },
+    { "wait": 800 },
+    { "shot": "03-range-90d" },
+    { "shotEl": ["03-trend-90d", ".panel-trend"] }
+  ]
+}
