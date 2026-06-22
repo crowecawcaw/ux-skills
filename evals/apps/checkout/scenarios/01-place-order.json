@@ -1,0 +1,29 @@
+{
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/checkout-shots",
+  "steps": [
+    { "goto": "/checkout/index.html" },
+    { "shot": "01-cart" },
+    { "click": "#to-shipping" },
+    { "shot": "02-shipping-empty" },
+    { "fill": ["#ship-name", "Steve Carter"] },
+    { "fill": ["#ship-email", "steve222@gmail.com"] },
+    { "fill": ["#ship-address", "742 Evergreen Terrace"] },
+    { "fill": ["#ship-city", "Springfield"] },
+    { "fill": ["#ship-zip", "62704"] },
+    { "shot": "03-shipping-filled" },
+    { "click": "#to-payment" },
+    { "shot": "04-payment-empty" },
+    { "fill": ["#pay-card", "4242 4242 4242 4242"] },
+    { "fill": ["#pay-cardname", "Steve Carter"] },
+    { "fill": ["#pay-exp", "08/29"] },
+    { "fill": ["#pay-cvc", "123"] },
+    { "shot": "05-payment-filled" },
+    { "click": "#to-review" },
+    { "shot": "06-review", "fullPage": true },
+    { "click": "#place-order" },
+    { "wait": 800 },
+    { "shot": "07-confirmation", "fullPage": true }
+  ]
+}
