@@ -1,0 +1,18 @@
+{
+  "_comment": "Happy-path for task 2 (compare options at a glance): filter to a category, then re-sort by price. After running, probe: rating sort, brand filters, scanning price/rating positions across cards.",
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/catalog/index.html" },
+    { "wait": 400 },
+    { "click": "label.opt:has-text('Footwear') input" },
+    { "wait": 500 },
+    { "shot": "02-footwear" },
+    { "click": "#sort" },
+    { "press": "ArrowDown" },
+    { "press": "Enter" },
+    { "wait": 500 },
+    { "shot": "02-sorted-price-asc" }
+  ]
+}

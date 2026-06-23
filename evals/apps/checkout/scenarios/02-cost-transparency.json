@@ -1,0 +1,20 @@
+{
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/checkout-shots",
+  "steps": [
+    { "goto": "/checkout/index.html" },
+    { "shotEl": ["cost-summary-cart", "#order-summary"] },
+    { "click": "[data-inc=\"0\"]" },
+    { "click": "[data-inc=\"0\"]" },
+    { "shotEl": ["cost-summary-after-qty", "#order-summary"] },
+    { "shot": "cost-cart-full", "fullPage": true },
+    { "click": "#to-shipping" },
+    { "fill": ["#ship-name", "Steve Carter"] },
+    { "fill": ["#ship-email", "steve222@gmail.com"] },
+    { "fill": ["#ship-address", "742 Evergreen Terrace"] },
+    { "fill": ["#ship-city", "Springfield"] },
+    { "fill": ["#ship-zip", "62704"] },
+    { "shotEl": ["cost-summary-shipping", "#order-summary"] }
+  ]
+}

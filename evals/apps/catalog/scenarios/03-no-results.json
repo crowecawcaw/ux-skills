@@ -1,0 +1,18 @@
+{
+  "_comment": "Happy-path for task 3 (recover from no-results): pick a category + a brand that has nothing in it, hit the empty state, then recover by relaxing a filter. WoolWorks makes no Footwear, so Footwear + WoolWorks = 0. After running, probe: 'Clear all filters', suggested-search chips, removing a single chip.",
+  "baseUrl": "http://localhost:4010",
+  "viewport": { "width": 1280, "height": 900 },
+  "outDir": "/tmp/shots",
+  "steps": [
+    { "goto": "/catalog/index.html" },
+    { "wait": 400 },
+    { "click": "label.opt:has-text('Footwear') input" },
+    { "wait": 400 },
+    { "click": "label.opt:has-text('WoolWorks') input" },
+    { "wait": 600 },
+    { "shot": "03-no-results" },
+    { "click": "#empty-relax" },
+    { "wait": 600 },
+    { "shot": "03-recovered" }
+  ]
+}
