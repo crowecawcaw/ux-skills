@@ -13,7 +13,11 @@ Severity guide: **high** = clearly breaks comprehension or misleads a decision;
 **medium** = degrades trust/clarity but recoverable; **low** = polish / minor
 legibility.
 
-15 seeded defects total (v1: 3, v2: 3, v3: 3, v4: 3, v5: 3).
+21 seeded defects total (v1: 3, v2: 3, v3: 3, v4: 3, v5: 3, v6: 3, v7: 3).
+v1–v5 seed usability defects; v6–v7 seed **aesthetic** defects (craft and
+register). Per the skill's evidence rule, aesthetic findings should be reported
+at **medium or lower** severity — for v6/v7, a finding graded high counts as a
+calibration miss (half credit) even when the element and problem are named.
 
 ---
 
@@ -67,16 +71,50 @@ Surfaces on: **03-range** (trend line vs target) and **02-channels** (statuses),
 | v5-d2 | All KPI cards | The **target / "% reached" context and the progress bar were removed** from every KPI — cards show only a bare figure + prior-period delta, with no way to judge against target. | context | high |
 | v5-d3 | Channel status colors | **"Close to target" reuses the same red** (text and bar) as "Behind target" — one color now means two different statuses, collapsing the three-state scheme and falsely flagging a near-target channel as behind. | color-meaning | medium |
 
+## v6 — craft: misalignment, mixed radii/shadows, type-scale sprawl
+
+Aesthetic variant. Usability is intact — all three tasks complete; these are
+measured-craft defects the style-inventory tool should surface (alignment
+near-misses, radius/shadow census, type census). Surfaces on: **01-overview**
+(KPI row) and app-wide.
+
+| id | location / element | what's wrong | principle | severity |
+|----|--------------------|--------------|-----------|----------|
+| v6-d1 | Third KPI card + channel panel | **Alignment near-misses**: the third KPI card sits 9px lower than its siblings, and the channel-breakdown panel's left edge is indented 6px right of the shared page gridline every other panel sits on. | craft / alignment | medium |
+| v6-d2 | Cards, panels, date-range control | **Inconsistent radii & shadows** across equivalent surfaces: KPI cards 4px radius, trend panel 16px, channel panel original; date-range control squared to 0; the Ad-spend KPI card carries a heavy drop shadow while its siblings stay flat. | craft / consistency | low |
+| v6-d3 | KPI labels, channel secondary text, assorted headings | **Type-scale sprawl + sub-legible labels**: KPI card labels and channel-row secondary text drop to 11px, and near-duplicate sizes (13 vs 14, 17 vs 18/19) push the page to ~9–11 distinct font sizes. | craft / type-scale, legibility | medium |
+
+## v7 — register: playful copy, decorative palette, novelty font
+
+Aesthetic variant. Usability and color *meaning* are intact (status colors and
+chart series untouched); these are tone breaks against the brief's stated
+constraint ("professional, calm, trustworthy, plain-spoken"). Surfaces on:
+**01-overview** primarily; app-wide.
+
+| id | location / element | what's wrong | principle | severity |
+|----|--------------------|--------------|-----------|----------|
+| v7-d1 | Headline, panel headings, freshness label | **Playful register in copy**: emoji + exclamatory headline ("🚀 Crushing it! …"), emoji-prefixed panel headings, casual freshness label ("Fresh as of … ☕"). Factual content survives, but the voice contradicts the brief's tone for a budget-decision tool. | tone / copy voice | medium |
+| v7-d2 | KPI cards + top bar | **Decorative palette**: each KPI card gets a different saturated pastel background (mint/lavender/peach/lemon) encoding nothing, and the top bar becomes a vivid purple-pink gradient — decoration sprawl that reads consumer-playful and dilutes the meaningful status colors (which are themselves unchanged). | tone / palette discipline | medium |
+| v7-d3 | All headings/panel titles | **Novelty display font**: headings render in a Comic Sans-style script stack while body text stays the original — undermines the trustworthy register. | tone / typography | low |
+
 ---
 
 ### Severity tally
 - high: v1-d1, v1-d2, v2-d1, v3-d1, v3-d2, v4-d2, v5-d1, v5-d2  (8)
-- medium: v1-d3, v2-d2, v4-d1, v4-d3, v5-d3  (5)
-- low: v2-d3, v3-d3  (2)
+- medium: v1-d3, v2-d2, v4-d1, v4-d3, v5-d3, v6-d1, v6-d3, v7-d1, v7-d2  (9)
+- low: v2-d3, v3-d3, v6-d2, v7-d3  (4)
 
 ### Notes for the grader
 - Every variant keeps the rest of the app good — defects are isolated.
 - v1/v4/v5 surface best on the **01-overview** scenario; v2 on **02-channels**;
   v3 on **03-range** (axis) + **02-channels** (donut); v4-d2 and v5-d1 on **03-range**.
+- v6/v7 surface on any scenario (app-wide styling); **01-overview** shows all six.
 - A defect counts as detected if the reviewer names the element and the problem
   (the exact principle label need not match).
+- For v6, full credit requires the finding to cite a measurement (the
+  style-inventory report), not eyeballed geometry; for v7, it must cite the
+  brief's tone constraint. Aesthetic findings graded **high** are a calibration
+  miss — half credit.
+- v6/v7 spurious-finding watch: the reviewer should NOT report broken color
+  meaning on v7 (status encoding is intact — only decoration changed) and
+  should NOT report task breakage on either.

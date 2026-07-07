@@ -105,6 +105,9 @@ known_gaps:
   - No per-channel drill-down or export — this is a top-level monitoring view.
 
 constraints:
+  - Tone — professional, calm, trustworthy, plain-spoken. This is a business
+    tool a marketer trusts with budget decisions; no playful, novelty, or
+    decorative styling that undercuts that trust.
   - Static single page; vanilla HTML/CSS/JS, no build step, no external CDNs,
     no network requests.
   - Charts are hand-rolled inline SVG / CSS (no charting library).

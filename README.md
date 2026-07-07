@@ -15,10 +15,21 @@ and produces actionable feedback.
   prioritized set of insights a senior UX reviewer would give, not a generic
   pass/fail scorecard of universal rules.
 
-- **Usability, not aesthetics.** The reviewer judges whether the persona can
-  understand and accomplish their goal — clarity, hierarchy, flow, feedback — not
-  whether the UI is beautiful. Visual taste and polish are out of scope; there
-  are better tools for beauty.
+- **Usability first; no unmeasured taste.** The headline judgment is always
+  whether the persona can understand and accomplish their goal — clarity,
+  hierarchy, flow, feedback. Aesthetic feedback is in scope, but only with
+  evidence: craft findings (misalignment, type sprawl, tiny text, contrast) must
+  cite DOM measurements from the style-inventory tool — models can't reliably
+  eyeball geometry — and register findings ("too playful for a professional
+  site") must cite tone constraints the brief actually states. Free-floating
+  taste remains out of scope, and aesthetic findings cap at medium severity
+  unless they break legibility.
+
+- **Evidence over judgment.** Prefer an observation you can point at to an
+  opinion: DOM measurements for geometry, context-free fresh-eyes probes
+  (simulated 5-second and first-click tests) for discoverability, genre
+  precedents for expectation breaks, and multiple independent reviewers when
+  thoroughness is worth the cost.
 
 - **For agents primarily, humans second.** We want to unlock agents to produce
   better UI designs through quality feedback. Feedback should be legible,
@@ -29,7 +40,10 @@ and produces actionable feedback.
 ## Layout
 
 - `skills/ux-review/` — the review skill: `SKILL.md` (the staged process),
-  `checklists.md` (shared spine + per-surface lenses), `examples.md`.
+  `checklists.md` (shared spine + per-surface lenses + measured aesthetics),
+  `precedents.md` (genre conventions per surface type), `examples.md`, and
+  `tools/style-inventory.mjs` (DOM measurement: type/color/spacing census,
+  alignment near-misses, contrast, overflow).
 - `DESIGN.md` — the design: the brief (input contract) and the review method,
   with the established UX methods they're adapted from.
 - `evals/` — synthetic test apps + harness for exercising the skill. See
