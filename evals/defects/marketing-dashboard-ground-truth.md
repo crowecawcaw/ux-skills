@@ -82,7 +82,7 @@ near-misses, radius/shadow census, type census). Surfaces on: **01-overview**
 |----|--------------------|--------------|-----------|----------|
 | v6-d1 | Third KPI card + channel panel | **Alignment near-misses**: the third KPI card sits 9px lower than its siblings, and the channel-breakdown panel's left edge is indented 6px right of the shared page gridline every other panel sits on. | craft / alignment | medium |
 | v6-d2 | Cards, panels, date-range control | **Inconsistent radii & shadows** across equivalent surfaces: KPI cards 4px radius, trend panel 16px, channel panel original; date-range control squared to 0; the Ad-spend KPI card carries a heavy drop shadow while its siblings stay flat. | craft / consistency | low |
-| v6-d3 | KPI labels, channel secondary text, assorted headings | **Type-scale sprawl + sub-legible labels**: KPI card labels and channel-row secondary text drop to 11px, and near-duplicate sizes (13 vs 14, 17 vs 18/19) push the page to ~9–11 distinct font sizes. | craft / type-scale, legibility | medium |
+| v6-d3 | KPI labels, channel status text, panel titles/subtitles | **Type-scale sprawl + sub-legible labels**: KPI card labels drop 13px → 11px (channel status text also 11px), and near-duplicate sizes are seeded — the two panel titles split 17px vs 19px (both 16px in the clean app) and the panel subtitles split 14px vs 13px — so the type census sprawls with no coherent scale. | craft / type-scale, legibility | medium |
 
 ## v7 — register: playful copy, decorative palette, novelty font
 
@@ -95,7 +95,7 @@ constraint ("professional, calm, trustworthy, plain-spoken"). Surfaces on:
 |----|--------------------|--------------|-----------|----------|
 | v7-d1 | Headline, panel headings, freshness label | **Playful register in copy**: emoji + exclamatory headline ("🚀 Crushing it! …"), emoji-prefixed panel headings, casual freshness label ("Fresh as of … ☕"). Factual content survives, but the voice contradicts the brief's tone for a budget-decision tool. | tone / copy voice | medium |
 | v7-d2 | KPI cards + top bar | **Decorative palette**: each KPI card gets a different saturated pastel background (mint/lavender/peach/lemon) encoding nothing, and the top bar becomes a vivid purple-pink gradient — decoration sprawl that reads consumer-playful and dilutes the meaningful status colors (which are themselves unchanged). | tone / palette discipline | medium |
-| v7-d3 | All headings/panel titles | **Novelty display font**: headings render in a Comic Sans-style script stack while body text stays the original — undermines the trustworthy register. | tone / typography | low |
+| v7-d3 | Page title + panel titles | **Novelty display font**: headings declare a Comic Sans-style script stack ('Comic Sans MS', 'Segoe Script', 'Bradley Hand', cursive) while body text keeps the original stack — undermines the trustworthy register. NOTE: headless-Linux eval environments lack these fonts, so screenshots fall back to a system sans; there, this defect is detectable only via the style inventory's font-family census (the declared stack appears in the type census). A finding citing the declared novelty stack counts as detected. | tone / typography | low |
 
 ---
 
