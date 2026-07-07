@@ -110,24 +110,22 @@
 
     valEl.textContent = opts.value;
 
-    // Sub-elements are optional per card; guard so the card still renders.
+    const d = opts.delta;
+    // For spend, "up" is not inherently good but we keep arrow factual; color stays neutral-ish.
+    deltaEl.textContent = pct(d) + " vs prior period";
+    deltaEl.classList.remove("up", "down");
+    if (opts.deltaGoodWhenUp === false) {
+      deltaEl.classList.add(d <= 0 ? "up" : "down");
+    } else {
+      deltaEl.classList.add(d >= 0 ? "up" : "down");
+    }
+
+    targetEl.textContent = opts.targetText;
+
     const ratio = opts.ratio;
     const status = statusFor(opts.deltaGoodWhenUp === false ? (2 - ratio) : ratio);
-    if (deltaEl) {
-      const d = opts.delta;
-      deltaEl.textContent = pct(d) + " vs prior period";
-      deltaEl.classList.remove("up", "down");
-      if (opts.deltaGoodWhenUp === false) {
-        deltaEl.classList.add(d <= 0 ? "up" : "down");
-      } else {
-        deltaEl.classList.add(d >= 0 ? "up" : "down");
-      }
-    }
-    if (targetEl) targetEl.textContent = opts.targetText;
-    if (barEl) {
-      barEl.style.width = Math.max(4, Math.min(100, ratio * 100)) + "%";
-      barEl.className = "kpi-bar-fill fill-" + status;
-    }
+    barEl.style.width = Math.max(4, Math.min(100, ratio * 100)) + "%";
+    barEl.className = "kpi-bar-fill fill-" + status;
   }
 
   // ---- Trend chart (inline SVG) ----------------------------------------
@@ -252,13 +250,11 @@
 
   // ---- Freshness label --------------------------------------------------
   function renderFreshness() {
-    const el = document.getElementById("freshness");
-    if (!el) return;
     const txt = AS_OF.toLocaleString("en-US", {
       month: "short", day: "numeric", year: "numeric",
       hour: "numeric", minute: "2-digit",
     });
-    el.textContent = "Data as of " + txt;
+    document.getElementById("freshness").textContent = "Data as of " + txt;
   }
 
   // ---- Wire it all up ---------------------------------------------------

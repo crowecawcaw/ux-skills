@@ -31,8 +31,8 @@ deliberately outside them.
 
 ## Implemented so far
 
-- **`marketing-dashboard`** (#7) — clean baseline + 5 defective variants for the
-  detection eval.
+- **`marketing-dashboard`** (#7) — clean baseline + 7 defective variants for the
+  detection eval (v1–v5 usability, v6–v7 aesthetic craft/tone).
 - **`checkout`** (#2) — clean baseline.
 - **`catalog`** (#4) — clean baseline.
 

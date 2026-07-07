@@ -8,7 +8,9 @@ the raw pass; the *final report* carries only prioritized insights (see
 `SKILL.md`).
 
 Apply the **shared spine** to every screen, plus the list for the brief's
-`surface_type`. Items are adapted from established UX sources (cited per group).
+`surface_type`. The **aesthetics & craft** list is applied once, app-level (like
+the encoding inventory), fed by the style-inventory tool's measurements. Items
+are adapted from established UX sources (cited per group).
 
 ---
 
@@ -40,6 +42,47 @@ Apply the **shared spine** to every screen, plus the list for the brief's
 - Do the same words, controls, and patterns mean the same thing everywhere, following conventions?
 - Are labels/messages in the user's language (no system jargon) and do they say what will actually happen?
 - Is text legible — size, contrast, reading order?
+
+---
+
+## Aesthetics & craft — app-level, once
+
+*Run after the style-inventory tool (`tools/style-inventory.mjs`) has produced
+its measurement report for the key screens. **Evidence rule:** every `✗` here
+must cite either a measurement from that report (confirmed in the screenshot) or
+a tone constraint stated in the brief. Never flag from eyeballed geometry or
+personal taste — if it isn't measured or brief-anchored, it isn't a finding.
+Severity for this group caps at **medium** unless the issue breaks legibility or
+comprehension (then it's an ordinary usability finding, not an aesthetic one).*
+
+**Craft — measured** *(type-scale practice; 4/8-pt spacing systems; WCAG 1.4.3)*
+1. Is the type scale coherent — roughly 4–7 distinct sizes, no near-duplicate
+   sizes (13px next to 14px), no visible text under 12px?
+2. Is the palette disciplined — no near-duplicate colors doing the same job, and
+   no decorative colors diluting the meaningful ones from the encoding inventory?
+3. Are corner radii and shadows consistent across equivalent surfaces (cards,
+   panels, inputs), rather than mixed for no reason?
+4. Does spacing come from a consistent scale (e.g. multiples of 4), with
+   equivalent gaps actually equal?
+5. Do elements that are meant to line up actually line up — no confirmed
+   near-miss edges (2–10px off a shared gridline or off their siblings)?
+6. Does all text meet WCAG contrast (4.5:1 normal, 3:1 large), per computed
+   ratios — not judged by eye?
+7. Is nothing unintentionally truncated, clipped, or overlapping at the brief's
+   primary viewport?
+
+**Register — judged against the brief** *(brand/tone review practice)*
+8. Does the rendered UI read as the brief's tone words? Name the concrete
+   signals — shape language (radii, pill vs square), color saturation,
+   typography, copy voice, emoji/illustration — that support or contradict each
+   stated adjective (e.g. rounded bubbly buttons + emoji + saturated pastels
+   read "playful" against a brief that says "professional, trustworthy").
+9. Does the copy's voice match the persona and tone — exclamation marks, slang,
+   or cuteness where the brief asks for calm, or stiff jargon where it asks for
+   friendly?
+10. Does visual density match the context of use — a calm, breathing layout for
+    a consumer/first-time surface; an information-dense one for a professional
+    tool the persona lives in?
 
 ---
 

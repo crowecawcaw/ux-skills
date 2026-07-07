@@ -1,0 +1,82 @@
+# UX-review detection eval — manually triggered.
+#
+# Runs evals/run-evals.mjs, which drives the Claude Code CLI headlessly
+# (`claude -p ... --dangerously-skip-permissions`) once per (model, variant,
+# mode) job against the marketing-dashboard-defects test apps, grades each
+# report against evals/defects/marketing-dashboard-ground-truth.md, and
+# writes a summary matrix.
+#
+# Auth: the CLI is authenticated with a Claude subscription via a long-lived
+# OAuth token, not an API key. Generate one locally with `claude setup-token`
+# (requires an active Claude subscription) and add the resulting token as a
+# repo secret named CLAUDE_CODE_OAUTH_TOKEN (Settings -> Secrets and
+# variables -> Actions -> New repository secret).
+#
+# Note: the `control` and `skill` inputs are presence flags on the
+# underlying CLI (there's no way to ask it to run neither mode) — setting
+# both to false falls back to the script's default of running both.
+name: UX review detection eval
+
+"on":
+  workflow_dispatch:
+    inputs:
+      models:
+        description: "Comma-separated model aliases to run"
+        type: string
+        default: "haiku,sonnet,opus"
+      variants:
+        description: "Comma-separated variant ids (v1..v7), or 'all'"
+        type: string
+        default: "all"
+      control:
+        description: "Run control mode (vague ask, no skill, no tools)"
+        type: boolean
+        default: true
+      skill:
+        description: "Run skill mode (full skills/ux-review/SKILL.md)"
+        type: boolean
+        default: true
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install playwright-core
+        run: npm i -D playwright-core
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run UX review evals
+        run: |
+          set -e
+          FLAGS=(--models "${{ inputs.models }}" --variants "${{ inputs.variants }}" --out evals-out)
+          if [ "${{ inputs.skill }}" = "true" ]; then
+            FLAGS+=(--skill)
+          fi
+          if [ "${{ inputs.control }}" = "true" ]; then
+            FLAGS+=(--control)
+          fi
+          node evals/run-evals.mjs "${FLAGS[@]}"
+
+      - name: Upload eval output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ux-eval-results
+          path: evals-out
+          if-no-files-found: warn

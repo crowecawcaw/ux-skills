@@ -110,24 +110,22 @@
 
     valEl.textContent = opts.value;
 
-    // Sub-elements are optional per card; guard so the card still renders.
+    const d = opts.delta;
+    // For spend, "up" is not inherently good but we keep arrow factual; color stays neutral-ish.
+    deltaEl.textContent = pct(d) + " vs prior period";
+    deltaEl.classList.remove("up", "down");
+    if (opts.deltaGoodWhenUp === false) {
+      deltaEl.classList.add(d <= 0 ? "up" : "down");
+    } else {
+      deltaEl.classList.add(d >= 0 ? "up" : "down");
+    }
+
+    targetEl.textContent = opts.targetText;
+
     const ratio = opts.ratio;
     const status = statusFor(opts.deltaGoodWhenUp === false ? (2 - ratio) : ratio);
-    if (deltaEl) {
-      const d = opts.delta;
-      deltaEl.textContent = pct(d) + " vs prior period";
-      deltaEl.classList.remove("up", "down");
-      if (opts.deltaGoodWhenUp === false) {
-        deltaEl.classList.add(d <= 0 ? "up" : "down");
-      } else {
-        deltaEl.classList.add(d >= 0 ? "up" : "down");
-      }
-    }
-    if (targetEl) targetEl.textContent = opts.targetText;
-    if (barEl) {
-      barEl.style.width = Math.max(4, Math.min(100, ratio * 100)) + "%";
-      barEl.className = "kpi-bar-fill fill-" + status;
-    }
+    barEl.style.width = Math.max(4, Math.min(100, ratio * 100)) + "%";
+    barEl.className = "kpi-bar-fill fill-" + status;
   }
 
   // ---- Trend chart (inline SVG) ----------------------------------------
@@ -238,27 +236,26 @@
     const close = ratio >= 0.95 && ratio < 1;
     const best = [...CHANNELS].sort((a, b) => b.perf - a.perf)[0];
     const worst = [...CHANNELS].sort((a, b) => a.perf - b.perf)[0];
+    const lead = onTrack ? "🚀 Crushing it!" : close ? "👀 So close!" : "😬 Uh-oh!";
     const phrase = onTrack
-      ? `<span class="hl-good"><strong>on track</strong></span>`
+      ? `<span class="hl-good"><strong>smashing your target</strong></span>`
       : close
-      ? `<strong>just under target</strong>`
+      ? `<strong>almost at target</strong>`
       : `<span class="hl-bad"><strong>behind target</strong></span>`;
     const window = s.days === 7 ? "the last 7 days" : s.days === 90 ? "the last 90 days" : "the last 30 days";
     el.innerHTML =
-      `Over ${window}, you brought in <strong>${fmtMoney(s.revenue)}</strong> — you're ${phrase} ` +
-      `(${Math.round(ratio * 100)}% of your ${fmtMoney(s.revTarget)} goal). ` +
-      `<strong>${best.name}</strong> is your strongest channel; <strong>${worst.name}</strong> needs attention.`;
+      `${lead} Over ${window}, you brought in <strong>${fmtMoney(s.revenue)}</strong> — you're ${phrase} ` +
+      `(${Math.round(ratio * 100)}% of the way to your ${fmtMoney(s.revTarget)} goal 🎉). ` +
+      `<strong>${best.name}</strong> is your rockstar channel 💪; <strong>${worst.name}</strong> needs some TLC 🩹.`;
   }
 
   // ---- Freshness label --------------------------------------------------
   function renderFreshness() {
-    const el = document.getElementById("freshness");
-    if (!el) return;
     const txt = AS_OF.toLocaleString("en-US", {
       month: "short", day: "numeric", year: "numeric",
       hour: "numeric", minute: "2-digit",
     });
-    el.textContent = "Data as of " + txt;
+    document.getElementById("freshness").textContent = "Fresh as of " + txt + " ☕";
   }
 
   // ---- Wire it all up ---------------------------------------------------
