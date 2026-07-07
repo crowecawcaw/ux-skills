@@ -102,7 +102,6 @@ body {
   background: linear-gradient(180deg, #f7f9ff 0%, #ffffff 60%);
   border-color: #d6def8;
 }
-/* Alignment near-miss: this card quietly sits 9px lower than its siblings. */
 #kpi-conversions { position: relative; top: 9px; }
 /* One card gets a heavy drop shadow while its siblings keep the flat/subtle one. */
 #kpi-spend { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25); }

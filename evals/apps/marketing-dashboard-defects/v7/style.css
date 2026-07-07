@@ -109,8 +109,6 @@ body {
   background: linear-gradient(180deg, #f7f9ff 0%, #ffffff 60%);
   border-color: #d6def8;
 }
-/* Decorative palette: each KPI card gets a different pastel wash. Purely
-   decorative — encodes nothing about status (status colors are untouched). */
 #kpi-revenue { background: #d3f8e2; border-color: #a9edc6; }
 #kpi-spend { background: #e6ddfb; border-color: #cdbdf6; }
 #kpi-conversions { background: #ffe3cf; border-color: #ffc9a3; }
