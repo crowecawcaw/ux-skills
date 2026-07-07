@@ -82,7 +82,7 @@ near-misses, radius/shadow census, type census). Surfaces on: **01-overview**
 |----|--------------------|--------------|-----------|----------|
 | v6-d1 | Third KPI card + channel panel | **Alignment near-misses**: the third KPI card sits 9px lower than its siblings, and the channel-breakdown panel's left edge is indented 6px right of the shared page gridline every other panel sits on. | craft / alignment | medium |
 | v6-d2 | Cards, panels, date-range control | **Inconsistent radii & shadows** across equivalent surfaces: KPI cards 4px radius, trend panel 16px, channel panel original; date-range control squared to 0; the Ad-spend KPI card carries a heavy drop shadow while its siblings stay flat. | craft / consistency | low |
-| v6-d3 | KPI labels, channel status text, panel titles/subtitles | **Type-scale sprawl + sub-legible labels**: KPI card labels drop 13px → 11px (channel status text also 11px), and near-duplicate sizes are seeded — the two panel titles split 17px vs 19px (both 16px in the clean app) and the panel subtitles split 14px vs 13px — so the type census sprawls with no coherent scale. | craft / type-scale, legibility | medium |
+| v6-d3 | KPI labels, channel status text, panel titles/subtitles | **Sub-legible labels + type-scale incoherence**: KPI card labels drop 13px → 11px (channel status text also 11px), and near-duplicate sizes are seeded — the two panel titles split 17px vs 19px (both 16px in the clean app) and the panel subtitles split 14px vs 13px. Note the *total* distinct-size count is no higher than the clean app's (chart labels already give it ~14); the detectable signals are the 11px labels in the sub-12px list and the mismatched panel titles/subtitles, not the raw count. | craft / type-scale, legibility | medium |
 
 ## v7 — register: playful copy, decorative palette, novelty font
 
@@ -115,6 +115,11 @@ constraint ("professional, calm, trustworthy, plain-spoken"). Surfaces on:
   style-inventory report), not eyeballed geometry; for v7, it must cite the
   brief's tone constraint. Aesthetic findings graded **high** are a calibration
   miss — half credit.
+- v6-d1 has two manifestations; naming either counts as detected. The 9px KPI
+  card offset is the reliably detectable one (the style inventory flags it as
+  a sibling-group near-miss). The 6px channel-panel indent is alone in its
+  grid column with no sibling edge to compare against, so the tool does not
+  flag it — treat it as a bonus, not a requirement.
 - v6/v7 spurious-finding watch: the reviewer should NOT report broken color
   meaning on v7 (status encoding is intact — only decoration changed) and
   should NOT report task breakage on either.

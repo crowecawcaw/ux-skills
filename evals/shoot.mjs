@@ -37,8 +37,25 @@
 // Steps fail fast (8s) on a bad selector rather than stalling, and log the error.
 
 // Requires playwright-core (and a browser): `npm i -D playwright-core && npx playwright install chromium`
-import { readFileSync } from 'fs';
+import { readFileSync, readdirSync, existsSync } from 'fs';
 import { chromium } from 'playwright-core';
+
+// The pinned playwright-core version may expect a newer chromium build than
+// what's cached locally. Fall back to whatever chromium-<rev> build actually
+// exists under PLAYWRIGHT_BROWSERS_PATH (same logic as style-inventory.mjs).
+async function launchBrowser() {
+  try {
+    return await chromium.launch();
+  } catch (err) {
+    const base = process.env.PLAYWRIGHT_BROWSERS_PATH || '/opt/pw-browsers';
+    let dirs = [];
+    try { dirs = readdirSync(base); } catch { /* fall through to rethrow */ }
+    const candidate = dirs.filter((d) => /^chromium-\d+$/.test(d)).sort().reverse()[0];
+    const exe = candidate ? `${base}/${candidate}/chrome-linux/chrome` : null;
+    if (!exe || !existsSync(exe)) throw err;
+    return await chromium.launch({ executablePath: exe });
+  }
+}
 
 const scenarioPath = process.argv[2];
 if (!scenarioPath) {
@@ -49,7 +66,7 @@ const s = JSON.parse(readFileSync(scenarioPath, 'utf8'));
 const baseUrl = s.baseUrl || 'http://localhost:5173';
 const outDir = process.argv[3] || s.outDir || '/tmp/shots';
 
-const browser = await chromium.launch();
+const browser = await launchBrowser();
 const page = await browser.newPage({ viewport: s.viewport || { width: 1280, height: 900 } });
 page.setDefaultTimeout(8000);  // fail fast on bad selectors instead of stalling 30s
 
