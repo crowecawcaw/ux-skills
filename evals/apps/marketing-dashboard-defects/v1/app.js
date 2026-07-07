@@ -110,8 +110,7 @@
 
     valEl.textContent = opts.value;
 
-    // Revenue card was stripped of its context block in this build; guard the
-    // optional sub-elements so the rest of the card still renders.
+    // Sub-elements are optional per card; guard so the card still renders.
     const ratio = opts.ratio;
     const status = statusFor(opts.deltaGoodWhenUp === false ? (2 - ratio) : ratio);
     if (deltaEl) {
@@ -254,7 +253,7 @@
   // ---- Freshness label --------------------------------------------------
   function renderFreshness() {
     const el = document.getElementById("freshness");
-    if (!el) return; // freshness label not present in this build
+    if (!el) return;
     const txt = AS_OF.toLocaleString("en-US", {
       month: "short", day: "numeric", year: "numeric",
       hour: "numeric", minute: "2-digit",
